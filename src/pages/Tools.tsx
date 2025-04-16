@@ -12,7 +12,7 @@ const tools = [
 export default function Tools() {
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-800">Available Tools</h1>
+      <h1 className="text-2xl font-bold text-gray-800">Tools</h1>
       <ul className="space-y-4">
         {tools.map((tool) => (
           <li key={tool.name} className="p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition">
