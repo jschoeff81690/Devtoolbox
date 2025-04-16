@@ -28,7 +28,7 @@ export default function JsonFormatter() {
         placeholder="Paste your JSON here..."
       />
       <div className="flex items-center gap-4 mt-4">
-        <button onClick={handleFormat} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <button onClick={handleFormat} className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue">
           Format JSON
         </button>
         {error && <span className="text-red-500">{error}</span>}
