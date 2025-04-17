@@ -9,4 +9,11 @@
   <url>
     <loc>https://devtoolbox.tools/json-formatter</loc>
   </url>
+  <url><loc>https://devtoolbox.tools/uuid-generator</loc></url>
+  <url><loc>https://devtoolbox.tools/base64</loc></url>
+  <url><loc>https://devtoolbox.tools/jwt-decoder</loc></url>
+  <url><loc>https://devtoolbox.tools/timestamp-converter</loc></url>
+  <url><loc>https://devtoolbox.tools/case-converter</loc></url>
+  <url><loc>https://devtoolbox.tools/lorem-ipsum</loc></url>
+  <url><loc>https://devtoolbox.tools/regex-tester</loc></url>
 </urlset>
