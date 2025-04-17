@@ -8,11 +8,45 @@ const tools = [
     description: 'Format, validate, and visualize your JSON data in a readable format.',
   },
   {
+    name: 'UUID Generator',
+    path: '/uuid-generator',
+    description: 'Generate random UUIDs quickly and copy them to clipboard.'
+  },
+  {
+    name: 'Base64 Encoder / Decoder',
+    path: '/base64',
+    description: 'Encode or decode Base64 strings on the fly.'
+  },
+  {
     name: 'ad-1',
     path: '',
     description: '',
   },
-  // You can add more tools here as you expand
+  {
+    name: 'JWT Decoder',
+    path: '/jwt-decoder',
+    description: 'Decode and inspect the contents of a JWT token.',
+  },
+  {
+    name: 'Timestamp Converter',
+    path: '/timestamp-converter',
+    description: 'Convert between Unix timestamps and readable date formats.',
+  },
+  {
+    name: 'Case Converter',
+    path: '/case-converter',
+    description: 'Convert text to UPPER, lower, Title, camelCase, or snake_case.',
+  },
+  {
+    name: 'Lorem Ipsum Generator',
+    path: '/lorem-ipsum',
+    description: 'Generate placeholder paragraphs of lorem ipsum text.',
+  },
+  {
+    name: 'Regex Tester',
+    path: '/regex-tester',
+    description: 'Test regular expressions against any input string.',
+  },
 ]
 
 export default function Tools() {
