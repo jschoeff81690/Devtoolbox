@@ -18,11 +18,6 @@ const tools = [
     description: 'Encode or decode Base64 strings on the fly.'
   },
   {
-    name: 'ad-1',
-    path: '',
-    description: '',
-  },
-  {
     name: 'JWT Decoder',
     path: '/jwt-decoder',
     description: 'Decode and inspect the contents of a JWT token.',
@@ -52,13 +47,6 @@ const tools = [
 export default function Tools() {
   const options = []
   for (var tool of tools) {
-      if (tool.name.startsWith("ad")) {
-          options.push(
-              <li key={tool.name} className="p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition">
-                  <AdBanner />
-              </li>
-          )
-      } else {
           options.push(
               <li key={tool.name} className="p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition">
                 <Link to={tool.path} className="text-xl text-custom-dark-blue font-semibold hover:underline">
@@ -67,7 +55,6 @@ export default function Tools() {
                 <p className="text-gray-600 text-sm mt-1">{tool.description}</p>
               </li>
           )
-      }
   }
   return (
     <div className="space-y-6">
