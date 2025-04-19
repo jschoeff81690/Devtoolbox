@@ -3,6 +3,16 @@ import AdBanner from '../components/AdBanner'
 
 const tools = [
   {
+    name: 'Markdown to HTML',
+    path: '/markdown-to-html',
+    description: 'Convert Markdown text to clean, readable HTML.'
+  },
+  {
+      name: "HTML/CSS Minifier",
+      path: "/html-css-minifier",
+      description: "Minify your HTML and CSS code quickly and efficiently.",
+  },
+  {
     name: 'JSON Formatter',
     path: '/json-formatter',
     description: 'Format, validate, and visualize your JSON data in a readable format.',
