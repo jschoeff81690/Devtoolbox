@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Helmet } from 'react-helmet-async';
+import ToolLayout from '../components/ToolLayout'
 
 export default function JsonFormatter() {
   const [input, setInput] = useState('')
@@ -19,31 +19,31 @@ export default function JsonFormatter() {
   }
 
   return (
-    <>
-      <Helmet>
-        <title>JSON Formatter – Devtoolbox</title>
-        <meta name="description" content="Format, validate and beautify your JSON instantly." />
-      </Helmet>
-      <div>
-        <h2 className="text-xl font-semibold mb-4">JSON Formatter & Validator</h2>
-        <textarea
-          rows={10}
-          className="w-full p-2 border rounded font-mono text-sm"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Paste your JSON here..."
-        />
-        <div className="flex items-center gap-4 mt-4">
-          <button onClick={handleFormat} className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue">
-            Format JSON
-          </button>
-          {error && <span className="text-red-500">{error}</span>}
-        </div>
-        {output && (
-          <pre className="bg-gray-100 border mt-4 p-4 rounded text-sm overflow-x-auto">{output}</pre>
-        )}
-      </div>
-    </>
+      <ToolLayout
+          title="JSON Formatter"
+          metaContent="Format, validate, and visualize your JSON data in a readable format."
+          path="json-formatter"
+        >
+          <div>
+            <h2 className="text-xl font-semibold mb-4">JSON Formatter & Validator</h2>
+            <textarea
+              rows={10}
+              className="w-full p-2 border rounded font-mono text-sm"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Paste your JSON here..."
+            />
+            <div className="flex items-center gap-4 mt-4">
+              <button onClick={handleFormat} className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue">
+                Format JSON
+              </button>
+              {error && <span className="text-red-500">{error}</span>}
+            </div>
+            {output && (
+              <pre className="bg-gray-100 border mt-4 p-4 rounded text-sm overflow-x-auto">{output}</pre>
+            )}
+          </div>
+        </ToolLayout>
   )
 }
 

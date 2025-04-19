@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ToolLayout from '../components/ToolLayout'
 
 export default function JwtDecoder() {
   const [token, setToken] = useState('')
@@ -17,6 +18,11 @@ export default function JwtDecoder() {
   }
 
   return (
+      <ToolLayout
+          title="JWT Decoder"
+          metaContent="Decode and inspect the contents of a JWT token."
+          path="jwt-decoder"
+        >
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">JWT Decoder</h1>
       <textarea value={token} onChange={(e) => setToken(e.target.value)} placeholder="Paste JWT here" className="w-full h-32 p-2 border rounded mb-4" />
@@ -32,6 +38,7 @@ export default function JwtDecoder() {
         </div>
       )}
     </div>
+        </ToolLayout>
   )
 }
 

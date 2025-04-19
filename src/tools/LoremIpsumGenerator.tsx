@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ToolLayout from '../components/ToolLayout'
 
 const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 
@@ -11,6 +12,11 @@ export default function LoremIpsumGenerator() {
   }
 
   return (
+      <ToolLayout
+          title="Lorem Ipsum Generator"
+          metaContent="Generate placeholder paragraphs of lorem ipsum text."
+          path="/lorem-ipsum"
+        >
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Lorem Ipsum Generator</h1>
       <div className="mb-2 flex items-center gap-2">
@@ -30,6 +36,7 @@ export default function LoremIpsumGenerator() {
       </div>
       <textarea readOnly className="w-full h-64 p-2 border rounded" value={output} />
     </div>
+        </ToolLayout>
   )
 }
 
