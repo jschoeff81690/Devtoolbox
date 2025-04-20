@@ -61,16 +61,10 @@ export default function Tools() {
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {tools.map((tool) => (
           <li key={tool.name} className="p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition">
-            {tool.name.startsWith('ad') ? (
-              <AdBanner />
-            ) : (
-              <>
-                <Link to={tool.path} className="text-xl text-custom-dark-blue font-semibold hover:underline">
-                  {tool.name}
-                </Link>
-                <p className="text-gray-600 text-sm mt-1">{tool.description}</p>
-              </>
-            )}
+            <Link to={tool.path} className="text-xl text-custom-dark-blue font-semibold hover:underline">
+              {tool.name}
+            </Link>
+            <p className="text-gray-600 text-sm mt-1">{tool.description}</p>
           </li>
         ))}
       </ul>
