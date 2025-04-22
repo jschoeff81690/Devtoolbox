@@ -9,7 +9,8 @@ export type ToolCategory =
   | 'Generator' 
   | 'Formatter' 
   | 'Utility'
-  | 'Design';
+  | 'Design'
+  | 'Analyzer';
 
 interface CategoryFilterProps {
   selectedCategory: ToolCategory;

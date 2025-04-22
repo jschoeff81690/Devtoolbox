@@ -74,6 +74,12 @@ export const tools: Tool[] = [
     description: 'Convert between HEX, RGB, and HSL color formats easily.',
     categories: ['Conversion', 'Utility', 'Design']
   },
+  {
+    name: 'Word Counter',
+    path: '/word-counter',
+    description: 'Count words, characters, sentences, and get detailed text statistics.',
+    categories: ['Text', 'Utility', 'Analyzer']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {
