@@ -92,6 +92,12 @@ export const tools: Tool[] = [
     description: 'Generate MD5, SHA-1, SHA-256, SHA-512, SHA-3, and RIPEMD-160 hashes from any text.',
     categories: ['Security', 'Utility', 'Conversion']
   },
+  {
+    name: 'QR Code Generator',
+    path: '/qr-code-generator',
+    description: 'Generate customizable QR codes for URLs, text, contact information, and more.',
+    categories: ['Generator', 'Web', 'Utility']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {

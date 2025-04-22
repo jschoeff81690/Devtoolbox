@@ -15,6 +15,7 @@ import ColorConverter from './tools/ColorConverter'
 import WordCounter from './tools/WordCounter'
 import UrlEncoder from './tools/UrlEncoder'
 import HashGenerator from './tools/HashGenerator'
+import QrCodeGenerator from './tools/QrCodeGenerator'
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/word-counter" element={<WordCounter />} />
         <Route path="/url-encoder" element={<UrlEncoder />} />
         <Route path="/hash-generator" element={<HashGenerator />} />
+        <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
       </Routes>
     </Layout>
   )
