@@ -2,6 +2,8 @@ import { ReactNode, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDarkMode } from '../context/DarkModeContext'
 import { MoonIcon, SunIcon, MenuIcon, CloseIcon } from './Icons'
+import ToolsDropdown from './ToolsDropdown'
+import { tools } from '../data/toolsData'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -23,9 +25,9 @@ export default function Layout({ children }: { children: ReactNode }) {
               <img src={`${import.meta.env.BASE_URL}devtoolbox-logo.png`} alt="Devtoolbox logo" className="h-8 w-8 rounded" />
               <span className="hidden sm:inline">Devtoolbox</span>
             </Link>
-            <Link to="/tools" className="text-blue-100 hover:text-white text-sm font-medium hidden sm:block">
-              Tools
-            </Link>
+            <div className="hidden sm:block">
+              <ToolsDropdown />
+            </div>
           </div>
           
           <div className="flex items-center gap-2">
@@ -51,14 +53,32 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className={`sm:hidden ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'} border-b`}>
-          <div className="px-4 py-3 space-y-2">
+          <div className="px-4 py-3 space-y-1">
             <Link 
               to="/tools" 
               className={`block px-3 py-2 rounded-md text-base font-medium ${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-100'}`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Tools
+              All Tools
             </Link>
+            
+            <div className={`my-1 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}></div>
+            
+            {/* Mobile tool links */}
+            {tools.map(tool => (
+              <Link
+                key={tool.path}
+                to={tool.path}
+                className={`block px-3 py-2 rounded-md text-sm ${
+                  darkMode 
+                    ? 'text-gray-300 hover:bg-gray-700 hover:text-white' 
+                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {tool.name}
+              </Link>
+            ))}
           </div>
         </div>
       )}
