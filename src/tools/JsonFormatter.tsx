@@ -9,8 +9,8 @@ export default function JsonFormatter() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
-  const [autoFormat, setAutoFormat] = useState(false)
   const { darkMode } = useDarkMode()
+  const autoFormat = true
 
   // Auto-format when enabled
   useEffect(() => {
@@ -52,16 +52,6 @@ export default function JsonFormatter() {
         usage="Paste your minified or unformatted JSON in the text area below, then click 'Format JSON' to convert it into a properly indented, readable format."
       >
         <div className="flex justify-between items-center mb-2">
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="auto-format"
-              checked={autoFormat}
-              onChange={(e) => setAutoFormat(e.target.checked)}
-              className="mr-1"
-            />
-            <label htmlFor="auto-format">Auto-format</label>
-          </div>
           <button
             onClick={loadSample}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -85,14 +75,6 @@ export default function JsonFormatter() {
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-medium">Formatted JSON</h3>
-              {!autoFormat && (
-                <button 
-                  onClick={handleFormat} 
-                  className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue"
-                >
-                  Format JSON
-                </button>
-              )}
             </div>
             
             {error ? (

@@ -9,8 +9,8 @@ import { useDarkMode } from '../context/DarkModeContext';
 export default function MarkdownToHtml() {
   const [markdown, setMarkdown] = useState('');
   const [html, setHtml] = useState('');
-  const [livePreview, setLivePreview] = useState(true);
   const { darkMode } = useDarkMode();
+  const livePreview = true
 
   // Live preview effect
   useEffect(() => {
@@ -122,16 +122,6 @@ function greet() {
         usage="Enter or paste your Markdown text in the input area, then click 'Convert to HTML' to see the HTML output and preview."
       >
         <div className="flex justify-between items-center mb-2">
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="live-preview"
-              checked={livePreview}
-              onChange={(e) => setLivePreview(e.target.checked)}
-              className="mr-1"
-            />
-            <label htmlFor="live-preview">Live preview</label>
-          </div>
           <button
             onClick={loadSampleMarkdown}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -155,14 +145,6 @@ function greet() {
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-medium">Preview</h3>
-              {!livePreview && (
-                <button
-                  onClick={convertToHtml}
-                  className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue"
-                >
-                  Convert to HTML
-                </button>
-              )}
             </div>
             
             <div 
