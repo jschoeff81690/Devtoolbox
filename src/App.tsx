@@ -16,6 +16,7 @@ import WordCounter from './tools/WordCounter'
 import UrlEncoder from './tools/UrlEncoder'
 import HashGenerator from './tools/HashGenerator'
 import QrCodeGenerator from './tools/QrCodeGenerator'
+import JsonSchemaGenerator from './tools/JsonSchemaGenerator'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<Tools />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/json-formatter" element={<JsonFormatter />} />
+        <Route path="/json-schema-generator" element={<JsonSchemaGenerator />} />
         <Route path="/uuid-generator" element={<UuidGenerator />} />
         <Route path="/base64" element={<Base64Tool />} />
         <Route path="/jwt-decoder" element={<JwtDecoder />} />

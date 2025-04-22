@@ -27,6 +27,12 @@ export const tools: Tool[] = [
     categories: ['Code', 'Formatter']
   },
   {
+    name: 'JSON Schema Generator',
+    path: '/json-schema-generator',
+    description: 'Generate JSON Schema from JSON data automatically.',
+    categories: ['Code', 'Generator', 'Utility']
+  },
+  {
     name: 'UUID Generator',
     path: '/uuid-generator',
     description: 'Generate random UUIDs quickly and copy them to clipboard.',
