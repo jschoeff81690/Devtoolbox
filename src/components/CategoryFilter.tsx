@@ -11,7 +11,8 @@ export type ToolCategory =
   | 'Utility'
   | 'Design'
   | 'Analyzer'
-  | 'Web';
+  | 'Web'
+  | 'Security';
 
 interface CategoryFilterProps {
   selectedCategory: ToolCategory;

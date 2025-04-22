@@ -14,6 +14,7 @@ import HtmlCssMinifier from './tools/HtmlCssMinifier'
 import ColorConverter from './tools/ColorConverter'
 import WordCounter from './tools/WordCounter'
 import UrlEncoder from './tools/UrlEncoder'
+import HashGenerator from './tools/HashGenerator'
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/color-converter" element={<ColorConverter />} />
         <Route path="/word-counter" element={<WordCounter />} />
         <Route path="/url-encoder" element={<UrlEncoder />} />
+        <Route path="/hash-generator" element={<HashGenerator />} />
       </Routes>
     </Layout>
   )

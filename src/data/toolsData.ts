@@ -86,6 +86,12 @@ export const tools: Tool[] = [
     description: 'Encode or decode URL components to make them valid for web addresses.',
     categories: ['Conversion', 'Web', 'Utility']
   },
+  {
+    name: 'Hash Generator',
+    path: '/hash-generator',
+    description: 'Generate MD5, SHA-1, SHA-256, SHA-512, SHA-3, and RIPEMD-160 hashes from any text.',
+    categories: ['Security', 'Utility', 'Conversion']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {
