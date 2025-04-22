@@ -8,7 +8,8 @@ export type ToolCategory =
   | 'Conversion' 
   | 'Generator' 
   | 'Formatter' 
-  | 'Utility';
+  | 'Utility'
+  | 'Design';
 
 interface CategoryFilterProps {
   selectedCategory: ToolCategory;

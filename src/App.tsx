@@ -11,6 +11,7 @@ import LoremIpsumGenerator from './tools/LoremIpsumGenerator'
 import RegexTester from './tools/RegexTester'
 import MarkdownToHtml from './tools/MarkdownToHtml'
 import HtmlCssMinifier from './tools/HtmlCssMinifier'
+import ColorConverter from './tools/ColorConverter'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/regex-tester" element={<RegexTester />} />
         <Route path="/markdown-to-html" element={<MarkdownToHtml />} />
         <Route path="/html-css-minifier" element={<HtmlCssMinifier />} />
+        <Route path="/color-converter" element={<ColorConverter />} />
       </Routes>
     </Layout>
   )

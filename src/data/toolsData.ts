@@ -68,6 +68,12 @@ export const tools: Tool[] = [
     description: 'Test regular expressions against any input string.',
     categories: ['Code', 'Utility']
   },
+  {
+    name: 'Color Converter',
+    path: '/color-converter',
+    description: 'Convert between HEX, RGB, and HSL color formats easily.',
+    categories: ['Conversion', 'Utility', 'Design']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {
