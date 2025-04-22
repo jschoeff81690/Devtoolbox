@@ -9,6 +9,7 @@
   <url>
     <loc>https://devtoolbox.tools/json-formatter</loc>
   </url>
+  <url><loc>https://devtoolbox.tools/json-schema-generator</loc></url>
   <url><loc>https://devtoolbox.tools/uuid-generator</loc></url>
   <url><loc>https://devtoolbox.tools/base64</loc></url>
   <url><loc>https://devtoolbox.tools/jwt-decoder</loc></url>
@@ -16,4 +17,11 @@
   <url><loc>https://devtoolbox.tools/case-converter</loc></url>
   <url><loc>https://devtoolbox.tools/lorem-ipsum</loc></url>
   <url><loc>https://devtoolbox.tools/regex-tester</loc></url>
+  <url><loc>https://devtoolbox.tools/markdown-to-html</loc></url>
+  <url><loc>https://devtoolbox.tools/html-css-minifier</loc></url>
+  <url><loc>https://devtoolbox.tools/color-converter</loc></url>
+  <url><loc>https://devtoolbox.tools/word-counter</loc></url>
+  <url><loc>https://devtoolbox.tools/url-encoder</loc></url>
+  <url><loc>https://devtoolbox.tools/hash-generator</loc></url>
+  <url><loc>https://devtoolbox.tools/qr-code-generator</loc></url>
 </urlset>
