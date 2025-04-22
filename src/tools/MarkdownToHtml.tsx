@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import LineNumberedEditor from '../components/LineNumberedEditor';
+import { useDarkMode } from '../context/DarkModeContext';
 
 export default function MarkdownToHtml() {
   const [markdown, setMarkdown] = useState('');
   const [html, setHtml] = useState('');
+  const [livePreview, setLivePreview] = useState(true);
+  const { darkMode } = useDarkMode();
+
+  // Live preview effect
+  useEffect(() => {
+    if (livePreview) {
+      convertToHtml();
+    }
+  }, [markdown, livePreview]);
 
   const convertToHtml = () => {
     try {
@@ -112,7 +122,16 @@ function greet() {
         usage="Enter or paste your Markdown text in the input area, then click 'Convert to HTML' to see the HTML output and preview."
       >
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-lg font-medium">Markdown Input</h3>
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="live-preview"
+              checked={livePreview}
+              onChange={(e) => setLivePreview(e.target.checked)}
+              className="mr-1"
+            />
+            <label htmlFor="live-preview">Live preview</label>
+          </div>
           <button
             onClick={loadSampleMarkdown}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -121,48 +140,66 @@ function greet() {
           </button>
         </div>
         
-        <LineNumberedEditor
-          value={markdown}
-          onChange={setMarkdown}
-          placeholder="Enter your Markdown here..."
-          language="markdown"
-          height="250px"
-        />
-        
-        <div className="my-4">
-          <button
-            onClick={convertToHtml}
-            className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue"
-          >
-            Convert to HTML
-          </button>
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1">
+            <h3 className="text-lg font-medium mb-2">Markdown Input</h3>
+            <LineNumberedEditor
+              value={markdown}
+              onChange={setMarkdown}
+              placeholder="Enter your Markdown here..."
+              language="markdown"
+              height="500px"
+            />
+          </div>
+          
+          <div className="flex-1">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-medium">Preview</h3>
+              {!livePreview && (
+                <button
+                  onClick={convertToHtml}
+                  className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue"
+                >
+                  Convert to HTML
+                </button>
+              )}
+            </div>
+            
+            <div 
+              className={`border rounded h-[500px] overflow-auto ${
+                darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-300'
+              }`}
+            >
+              {html ? (
+                <div className={`p-4 prose max-w-none ${darkMode ? 'prose-invert' : ''}`}>
+                  <div dangerouslySetInnerHTML={{ __html: html }} />
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400">
+                  Preview will appear here
+                </div>
+              )}
+            </div>
+          </div>
         </div>
         
         {html && (
-          <>
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-2">HTML Output</h3>
-              <div className="border rounded p-2 bg-gray-50 overflow-x-auto">
-                <pre className="text-sm font-mono whitespace-pre-wrap">{html}</pre>
-              </div>
-              
-              <div className="flex justify-end mt-2">
-                <button
-                  onClick={() => navigator.clipboard.writeText(html)}
-                  className="text-sm px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
-                >
-                  Copy HTML
-                </button>
-              </div>
+          <div className="mt-6">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-medium">HTML Output</h3>
+              <button
+                onClick={() => navigator.clipboard.writeText(html)}
+                className="text-sm px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
+              >
+                Copy HTML
+              </button>
             </div>
-            
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-2">Preview</h3>
-              <div className="border rounded p-4 prose max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: html }} />
-              </div>
+            <div className={`border rounded p-2 overflow-x-auto ${
+              darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-300'
+            }`}>
+              <pre className="text-sm font-mono whitespace-pre-wrap">{html}</pre>
             </div>
-          </>
+          </div>
         )}
       </ResponsiveToolContainer>
     </ToolLayout>
