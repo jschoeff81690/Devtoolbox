@@ -7,6 +7,30 @@ html {
   transition: background-color 0.3s ease;
 }
 
+/* Responsive touch-friendly styles */
+@media (max-width: 640px) {
+  button, 
+  [type='button'], 
+  [type='reset'], 
+  [type='submit'] {
+    @apply py-3 px-4;
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  input, 
+  select, 
+  textarea {
+    @apply text-base;
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
 /* Dark mode styles for common elements */
 .dark input,
 .dark textarea,
@@ -45,4 +69,14 @@ html {
 /* Tool-specific dark mode styles */
 .dark .bg-blue-50 {
   @apply bg-gray-800 border-gray-700;
+}
+
+/* Improved focus styles for accessibility */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  @apply outline-none ring-2 ring-blue-500;
 }
