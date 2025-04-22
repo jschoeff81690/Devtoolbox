@@ -80,6 +80,12 @@ export const tools: Tool[] = [
     description: 'Count words, characters, sentences, and get detailed text statistics.',
     categories: ['Text', 'Utility', 'Analyzer']
   },
+  {
+    name: 'URL Encoder/Decoder',
+    path: '/url-encoder',
+    description: 'Encode or decode URL components to make them valid for web addresses.',
+    categories: ['Conversion', 'Web', 'Utility']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {

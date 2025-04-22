@@ -13,6 +13,7 @@ import MarkdownToHtml from './tools/MarkdownToHtml'
 import HtmlCssMinifier from './tools/HtmlCssMinifier'
 import ColorConverter from './tools/ColorConverter'
 import WordCounter from './tools/WordCounter'
+import UrlEncoder from './tools/UrlEncoder'
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/html-css-minifier" element={<HtmlCssMinifier />} />
         <Route path="/color-converter" element={<ColorConverter />} />
         <Route path="/word-counter" element={<WordCounter />} />
+        <Route path="/url-encoder" element={<UrlEncoder />} />
       </Routes>
     </Layout>
   )

@@ -10,7 +10,8 @@ export type ToolCategory =
   | 'Formatter' 
   | 'Utility'
   | 'Design'
-  | 'Analyzer';
+  | 'Analyzer'
+  | 'Web';
 
 interface CategoryFilterProps {
   selectedCategory: ToolCategory;
