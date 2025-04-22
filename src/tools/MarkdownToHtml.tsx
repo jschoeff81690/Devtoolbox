@@ -36,6 +36,10 @@ export default function MarkdownToHtml() {
     >
       <div>
         <h2 className="text-xl font-semibold mb-4">Markdown to HTML Converter</h2>
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+          <p className="mb-2"><strong>What it does:</strong> Converts Markdown syntax to HTML, with live preview of the rendered result.</p>
+          <p><strong>How to use:</strong> Type or paste your Markdown in the left panel, and see the HTML preview on the right. Use the "Copy HTML" button to copy the generated HTML code or "Export" to download it as an HTML file.</p>
+        </div>
         <div className="grid md:grid-cols-2 gap-6">
           <textarea
             className="w-full p-2 border rounded font-mono text-sm"

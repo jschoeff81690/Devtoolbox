@@ -21,6 +21,10 @@ export default function UuidGenerator() {
         >
             <div className="p-4">
               <h1 className="text-2xl font-bold mb-4">UUID Generator</h1>
+              <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+                <p className="mb-2"><strong>What it does:</strong> Generates random, cryptographically secure UUIDs (Universally Unique Identifiers).</p>
+                <p><strong>How to use:</strong> Click the "Generate UUID" button to create a new UUID. Use the "Copy" button to copy it to your clipboard.</p>
+              </div>
               <button onClick={generateUuid} className="bg-custom-light-blue hover:bg-custom-dark-blue text-white font-semibold py-2 px-4 rounded">
                 Generate UUID
               </button>

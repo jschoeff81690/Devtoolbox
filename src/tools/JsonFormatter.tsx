@@ -26,6 +26,10 @@ export default function JsonFormatter() {
         >
           <div>
             <h2 className="text-xl font-semibold mb-4">JSON Formatter & Validator</h2>
+            <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+              <p className="mb-2"><strong>What it does:</strong> Formats and validates your JSON data to make it readable and properly structured.</p>
+              <p><strong>How to use:</strong> Paste your minified or unformatted JSON in the text area below, then click "Format JSON" to convert it into a properly indented, readable format.</p>
+            </div>
             <textarea
               rows={10}
               className="w-full p-2 border rounded font-mono text-sm"

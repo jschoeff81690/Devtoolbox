@@ -19,6 +19,10 @@ export default function LoremIpsumGenerator() {
         >
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Lorem Ipsum Generator</h1>
+      <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+        <p className="mb-2"><strong>What it does:</strong> Generates placeholder "Lorem Ipsum" text commonly used in design and publishing.</p>
+        <p><strong>How to use:</strong> Select the number of paragraphs you want to generate (1-20), then click "Generate" to create the placeholder text.</p>
+      </div>
       <div className="mb-2 flex items-center gap-2">
         <label htmlFor="count">Paragraphs:</label>
         <input

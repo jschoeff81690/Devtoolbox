@@ -24,6 +24,10 @@ export default function RegexTester() {
         >
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4">Regex Tester</h1>
+          <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+            <p className="mb-2"><strong>What it does:</strong> Tests regular expressions against your input text and shows all matches.</p>
+            <p><strong>How to use:</strong> Enter your regex pattern in the first field, add the text you want to test in the textarea, then click "Test" to see all matches.</p>
+          </div>
           <input
             value={pattern}
             onChange={(e) => setPattern(e.target.value)}

@@ -35,6 +35,10 @@ export default function HtmlCssMinifier() {
     >
       <div>
         <h2 className="text-xl font-semibold mb-4">HTML/CSS Minifier</h2>
+        <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+          <p className="mb-2"><strong>What it does:</strong> Reduces the size of HTML and CSS files by removing unnecessary characters like whitespace, comments, and line breaks.</p>
+          <p><strong>How to use:</strong> Paste your HTML or CSS code in the text area below. The tool will automatically minify it. Click "Copy Minified" to copy the result to your clipboard.</p>
+        </div>
         <textarea
           className="w-full p-2 border rounded font-mono text-sm"
           rows={10}

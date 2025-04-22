@@ -29,6 +29,10 @@ export default function Base64Tool() {
         >
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4">Base64 Encoder / Decoder</h1>
+          <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
+            <p className="mb-2"><strong>What it does:</strong> Converts text between regular format and Base64 encoding.</p>
+            <p><strong>How to use:</strong> Select "Encode" to convert normal text to Base64, or "Decode" to convert Base64 back to normal text. Enter your input text and click "Convert". Use the "Copy" button to copy the result.</p>
+          </div>
           <div className="mb-2">
             <label className="mr-2">
               <input type="radio" checked={mode === 'encode'} onChange={() => setMode('encode')} />
