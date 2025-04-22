@@ -2,3 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark mode transitions */
+html {
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode styles for common elements */
+.dark input,
+.dark textarea,
+.dark select {
+  @apply bg-gray-800 border-gray-700 text-gray-100;
+}
+
+.dark pre,
+.dark code {
+  @apply bg-gray-800 text-gray-100;
+}
+
+.dark button.bg-custom-light-blue {
+  @apply hover:bg-custom-dark-blue;
+}
+
+.dark .prose {
+  @apply text-gray-300;
+}
+
+.dark .prose a {
+  @apply text-blue-400;
+}
+
+.dark .prose strong {
+  @apply text-gray-100;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  @apply text-gray-100;
+}
+
+/* Tool-specific dark mode styles */
+.dark .bg-blue-50 {
+  @apply bg-gray-800 border-gray-700;
+}
