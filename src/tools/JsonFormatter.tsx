@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ToolLayout from '../components/ToolLayout'
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer'
+import LineNumberedEditor from '../components/LineNumberedEditor'
+import LineNumberedOutput from '../components/LineNumberedOutput'
 
 export default function JsonFormatter() {
   const [input, setInput] = useState('')
@@ -30,14 +32,14 @@ export default function JsonFormatter() {
         description="Formats and validates your JSON data to make it readable and properly structured."
         usage="Paste your minified or unformatted JSON in the text area below, then click 'Format JSON' to convert it into a properly indented, readable format."
       >
-        <textarea
-          rows={10}
-          className="w-full p-2 border rounded font-mono text-sm"
+        <LineNumberedEditor
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={setInput}
           placeholder="Paste your JSON here..."
+          language="json"
+          height="200px"
         />
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4 my-4">
           <button 
             onClick={handleFormat} 
             className="bg-custom-light-blue text-white px-4 py-2 rounded hover:bg-custom-dark-blue"
@@ -47,7 +49,11 @@ export default function JsonFormatter() {
           {error && <span className="text-red-500 text-sm">{error}</span>}
         </div>
         {output && (
-          <pre className="bg-gray-100 border p-4 rounded text-sm overflow-x-auto">{output}</pre>
+          <LineNumberedOutput
+            content={output}
+            language="json"
+            height="300px"
+          />
         )}
       </ResponsiveToolContainer>
     </ToolLayout>

@@ -85,10 +85,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       
       {/* Main Layout */}
       <div className="flex flex-1">
-        {/* Left Sidebar (ads or nav) */}
-        <aside className={`w-1/6 hidden lg:block border-r p-4 text-sm ${darkMode ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400' : 'text-gray-500'}`}>
-          <p>Ad space</p>
-        </aside>
 
         {/* Main Content */}
         <main className={`flex-1 p-2 sm:p-4 ${darkMode ? 'dark:bg-gray-900' : ''}`}>{children}</main>

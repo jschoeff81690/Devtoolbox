@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import LineNumberedEditor from '../components/LineNumberedEditor';
+import LineNumberedOutput from '../components/LineNumberedOutput';
 
 export default function JsonSchemaGenerator() {
   const [input, setInput] = useState('');
@@ -100,33 +102,28 @@ export default function JsonSchemaGenerator() {
                 Load Sample
               </button>
             </div>
-            <textarea
-              rows={15}
-              className={`w-full p-2 border rounded font-mono text-sm ${
-                darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
-              }`}
+            <LineNumberedEditor
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
               placeholder="Paste your JSON here..."
+              language="json"
+              height="300px"
             />
           </div>
           <div className="flex-1">
             <label className="font-medium block mb-2">Generated JSON Schema</label>
-            <textarea
-              rows={15}
-              className={`w-full p-2 border rounded font-mono text-sm ${
-                darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-100 border-gray-300'
-              }`}
-              value={output}
-              readOnly
-              placeholder="Schema will appear here..."
+            <LineNumberedOutput
+              content={output}
+              language="json"
+              height="300px"
+              showCopyButton={true}
             />
           </div>
         </div>
 
-        <div className="mb-4 p-4 border rounded-md bg-opacity-50 ${
+        <div className={`mb-4 p-4 border rounded-md ${
           darkMode ? 'bg-gray-800 border-gray-700' : 'bg-blue-50 border-blue-200'
-        }">
+        }`}>
           <h3 className="font-medium mb-2">Schema Options</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
