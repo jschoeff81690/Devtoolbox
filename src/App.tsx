@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import About from './pages/About'
+import ApiTester from './tools/ApiTester'
 import Base64Tool from './tools/Base64Tool'
 import CaseConverter from './tools/CaseConverter'
 import ColorConverter from './tools/ColorConverter'
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/hash-generator" element={<HashGenerator />} />
         <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
         <Route path="/diff-checker" element={<DiffChecker />} />
+        <Route path="/api-tester" element={<ApiTester />} />
       </Routes>
     </Layout>
   )

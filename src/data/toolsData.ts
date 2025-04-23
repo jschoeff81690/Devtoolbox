@@ -110,6 +110,12 @@ export const tools: Tool[] = [
     description: 'Compare two texts and highlight the differences between them.',
     categories: ['Code', 'Text', 'Analyzer']
   },
+  {
+    name: 'API Tester',
+    path: '/api-tester',
+    description: 'Test API endpoints with different HTTP methods, headers, and request bodies.',
+    categories: ['Web', 'Developer', 'Utility']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {
