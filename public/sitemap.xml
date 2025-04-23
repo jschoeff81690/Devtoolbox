@@ -7,6 +7,15 @@
     <loc>https://devtoolbox.tools/tools</loc>
   </url>
   <url>
+    <loc>https://devtoolbox.tools/about</loc>
+  </url>
+  <url>
+    <loc>https://devtoolbox.tools/contact</loc>
+  </url>
+  <url>
+    <loc>https://devtoolbox.tools/privacy</loc>
+  </url>
+  <url>
     <loc>https://devtoolbox.tools/json-formatter</loc>
   </url>
   <url><loc>https://devtoolbox.tools/json-schema-generator</loc></url>

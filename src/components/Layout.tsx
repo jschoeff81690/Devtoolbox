@@ -79,6 +79,43 @@ export default function Layout({ children }: { children: ReactNode }) {
                 {tool.name}
               </Link>
             ))}
+            
+            <div className={`my-1 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}></div>
+            
+            {/* Mobile page links */}
+            <Link 
+              to="/about" 
+              className={`block px-3 py-2 rounded-md text-sm ${
+                darkMode 
+                  ? 'text-gray-300 hover:bg-gray-700 hover:text-white' 
+                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link 
+              to="/contact" 
+              className={`block px-3 py-2 rounded-md text-sm ${
+                darkMode 
+                  ? 'text-gray-300 hover:bg-gray-700 hover:text-white' 
+                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            <Link 
+              to="/privacy" 
+              className={`block px-3 py-2 rounded-md text-sm ${
+                darkMode 
+                  ? 'text-gray-300 hover:bg-gray-700 hover:text-white' 
+                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
       )}
@@ -96,8 +133,30 @@ export default function Layout({ children }: { children: ReactNode }) {
       </div>
 
       {/* Footer */}
-      <footer className={`border-t px-4 sm:px-6 py-4 text-center text-sm ${darkMode ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400' : 'bg-white text-gray-500'}`}>
-        &copy; {new Date().getFullYear()} Devtoolbox. All rights reserved.
+      <footer className={`border-t px-4 sm:px-6 py-4 text-center ${darkMode ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400' : 'bg-white text-gray-500'}`}>
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm">
+          <div>&copy; {new Date().getFullYear()} Devtoolbox. All rights reserved.</div>
+          <div className="flex gap-4">
+            <Link 
+              to="/about" 
+              className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
+            >
+              About
+            </Link>
+            <Link 
+              to="/contact" 
+              className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
+            >
+              Contact
+            </Link>
+            <Link 
+              to="/privacy" 
+              className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
+            >
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
       </footer>
     </div>
   )
