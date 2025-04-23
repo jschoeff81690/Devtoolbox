@@ -4,6 +4,7 @@ import Base64Tool from './tools/Base64Tool'
 import CaseConverter from './tools/CaseConverter'
 import ColorConverter from './tools/ColorConverter'
 import Contact from './pages/Contact'
+import DiffChecker from './tools/DiffChecker'
 import HashGenerator from './tools/HashGenerator'
 import HtmlCssMinifier from './tools/HtmlCssMinifier'
 import JsonFormatter from './tools/JsonFormatter'
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="/url-encoder" element={<UrlEncoder />} />
         <Route path="/hash-generator" element={<HashGenerator />} />
         <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
+        <Route path="/diff-checker" element={<DiffChecker />} />
       </Routes>
     </Layout>
   )

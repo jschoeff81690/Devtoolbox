@@ -104,6 +104,12 @@ export const tools: Tool[] = [
     description: 'Generate customizable QR codes for URLs, text, contact information, and more.',
     categories: ['Generator', 'Web', 'Utility']
   },
+  {
+    name: 'Diff Checker',
+    path: '/diff-checker',
+    description: 'Compare two texts and highlight the differences between them.',
+    categories: ['Code', 'Text', 'Analyzer']
+  },
 ];
 
 export const getAllCategories = (): ToolCategory[] => {
