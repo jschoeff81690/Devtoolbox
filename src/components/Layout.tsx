@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDarkMode } from '../context/DarkModeContext'
 import { useSearch } from '../context/SearchContext'
@@ -13,6 +13,18 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  
+  // Clear search when navigating to a tool page
+  useEffect(() => {
+    const isToolPage = tools.some(tool => tool.path === location.pathname);
+    if (isToolPage && searchTerm) {
+      // Don't clear immediately to avoid UI flicker during navigation
+      const timer = setTimeout(() => {
+        setSearchTerm('');
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname, searchTerm, setSearchTerm]);
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);

@@ -7,10 +7,21 @@ import { tools, getAllCategories } from '../data/toolsData';
 
 export default function Tools() {
   const { darkMode } = useDarkMode();
-  const { searchTerm } = useSearch();
+  const { searchTerm, setSearchTerm } = useSearch();
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory>('All');
   
   const categories = useMemo(() => getAllCategories(), []);
+  
+  // Clear search when component mounts (when navigating back to tools)
+  useEffect(() => {
+    // Only clear if we're coming from a tool page, not from initial search
+    const fromToolPage = document.referrer.includes(window.location.origin) && 
+                         !document.referrer.includes('/tools');
+    
+    if (fromToolPage) {
+      setSearchTerm('');
+    }
+  }, [setSearchTerm]);
   
   const filteredTools = useMemo(() => {
     return tools.filter(tool => {
