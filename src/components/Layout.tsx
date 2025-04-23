@@ -128,7 +128,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         {/* Right Sidebar (ads) */}
         <aside className={`w-1/6 hidden lg:block border-l p-4 text-sm ${darkMode ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400' : 'text-gray-500'}`}>
-          <p>Ad space</p>
+        
         </aside>
       </div>
 
