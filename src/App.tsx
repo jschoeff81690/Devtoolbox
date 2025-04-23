@@ -1,28 +1,34 @@
 import { Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout'
-import JsonFormatter from './tools/JsonFormatter'
-import Tools from './pages/Tools'
-import UuidGenerator from './tools/UuidGenerator'
+import About from './pages/About'
 import Base64Tool from './tools/Base64Tool'
-import JwtDecoder from './tools/JwtDecoder'
-import TimestampConverter from './tools/TimestampConverter'
 import CaseConverter from './tools/CaseConverter'
-import LoremIpsumGenerator from './tools/LoremIpsumGenerator'
-import RegexTester from './tools/RegexTester'
-import MarkdownToHtml from './tools/MarkdownToHtml'
-import HtmlCssMinifier from './tools/HtmlCssMinifier'
 import ColorConverter from './tools/ColorConverter'
-import WordCounter from './tools/WordCounter'
-import UrlEncoder from './tools/UrlEncoder'
+import Contact from './pages/Contact'
 import HashGenerator from './tools/HashGenerator'
-import QrCodeGenerator from './tools/QrCodeGenerator'
+import HtmlCssMinifier from './tools/HtmlCssMinifier'
+import JsonFormatter from './tools/JsonFormatter'
 import JsonSchemaGenerator from './tools/JsonSchemaGenerator'
+import JwtDecoder from './tools/JwtDecoder'
+import Layout from './components/Layout'
+import LoremIpsumGenerator from './tools/LoremIpsumGenerator'
+import MarkdownToHtml from './tools/MarkdownToHtml'
+import Privacy from './pages/Privacy'
+import QrCodeGenerator from './tools/QrCodeGenerator'
+import RegexTester from './tools/RegexTester'
+import TimestampConverter from './tools/TimestampConverter'
+import Tools from './pages/Tools'
+import UrlEncoder from './tools/UrlEncoder'
+import UuidGenerator from './tools/UuidGenerator'
+import WordCounter from './tools/WordCounter'
 
 export default function App() {
   return (
     <Layout>
       <Routes>
         <Route path="/" element={<Tools />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/json-formatter" element={<JsonFormatter />} />
         <Route path="/json-schema-generator" element={<JsonSchemaGenerator />} />
