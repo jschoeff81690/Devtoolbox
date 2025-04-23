@@ -5,17 +5,26 @@ interface SearchBarProps {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   placeholder?: string;
+  className?: string;
 }
 
 export default function SearchBar({ 
   searchTerm, 
   setSearchTerm, 
-  placeholder = "Search tools..." 
+  placeholder = "Search tools...",
+  className = ""
 }: SearchBarProps) {
   const { darkMode } = useDarkMode();
   
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      // Prevent form submission if this is in a form
+      e.preventDefault();
+    }
+  };
+  
   return (
-    <div className="relative w-full max-w-md">
+    <div className={`relative ${className}`}>
       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <svg 
           className={`w-4 h-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} 
@@ -37,6 +46,7 @@ export default function SearchBar({
         type="search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyDown}
         className={`block w-full p-2 pl-10 text-sm rounded-lg ${
           darkMode 
             ? 'bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500' 

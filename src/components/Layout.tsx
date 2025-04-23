@@ -1,16 +1,29 @@
 import { ReactNode, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDarkMode } from '../context/DarkModeContext'
+import { useSearch } from '../context/SearchContext'
 import { MoonIcon, SunIcon, MenuIcon, CloseIcon } from './Icons'
 import ToolsDropdown from './ToolsDropdown'
+import SearchBar from './SearchBar'
 import { tools } from '../data/toolsData'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const { searchTerm, setSearchTerm } = useSearch();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+  
+  // Handle search submission
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    if (location.pathname !== '/tools') {
+      navigate('/tools');
+    }
   };
   
   return (
@@ -28,6 +41,16 @@ export default function Layout({ children }: { children: ReactNode }) {
             <div className="hidden sm:block">
               <ToolsDropdown />
             </div>
+          </div>
+          
+          {/* Search bar in header */}
+          <div className="hidden md:block flex-1 max-w-md mx-4">
+            <SearchBar 
+              searchTerm={searchTerm} 
+              setSearchTerm={handleSearch} 
+              placeholder="Search tools..."
+              className="w-full"
+            />
           </div>
           
           <div className="flex items-center gap-2">
@@ -53,6 +76,15 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className={`sm:hidden ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'} border-b`}>
+          {/* Mobile search */}
+          <div className="px-4 py-3">
+            <SearchBar 
+              searchTerm={searchTerm} 
+              setSearchTerm={handleSearch} 
+              placeholder="Search tools..."
+            />
+          </div>
+          
           <div className="px-4 py-3 space-y-1">
             <Link 
               to="/tools" 
@@ -128,7 +160,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         {/* Right Sidebar (ads) */}
         <aside className={`w-1/6 hidden lg:block border-l p-4 text-sm ${darkMode ? 'dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400' : 'text-gray-500'}`}>
-        
+          <p>Ad space</p>
         </aside>
       </div>
 

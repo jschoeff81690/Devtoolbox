@@ -5,13 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import { HelmetProvider } from 'react-helmet-async';
 import { DarkModeProvider } from './context/DarkModeContext';
+import { SearchProvider } from './context/SearchContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <HelmetProvider>
         <DarkModeProvider>
-          <App />
+          <SearchProvider>
+            <App />
+          </SearchProvider>
         </DarkModeProvider>
       </HelmetProvider>
     </BrowserRouter>

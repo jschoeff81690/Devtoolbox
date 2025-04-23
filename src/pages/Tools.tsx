@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
-import SearchBar from '../components/SearchBar';
+import { useSearch } from '../context/SearchContext';
 import CategoryFilter, { ToolCategory } from '../components/CategoryFilter';
 import { tools, getAllCategories } from '../data/toolsData';
 
 export default function Tools() {
   const { darkMode } = useDarkMode();
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm } = useSearch();
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory>('All');
   
   const categories = useMemo(() => getAllCategories(), []);
@@ -32,7 +32,6 @@ export default function Tools() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="text-2xl font-bold">Tools</h1>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
       
       <CategoryFilter 
