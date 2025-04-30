@@ -1,119 +1,81 @@
 import { ToolCategory } from '../components/CategoryFilter';
 
 export interface Tool {
-  name: string;
   path: string;
-  description: string;
   categories: ToolCategory[];
 }
 
 export const tools: Tool[] = [
   {
-    name: 'Markdown to HTML',
     path: '/markdown-to-html',
-    description: 'Convert Markdown text to clean, readable HTML.',
     categories: ['Conversion', 'Text', 'Formatter']
   },
   {
-    name: 'HTML/CSS Minifier',
     path: '/html-css-minifier',
-    description: 'Minify your HTML and CSS code quickly and efficiently.',
     categories: ['Code', 'Formatter', 'Utility']
   },
   {
-    name: 'JSON Formatter',
     path: '/json-formatter',
-    description: 'Format, validate, and visualize your JSON data in a readable format.',
     categories: ['Code', 'Formatter']
   },
   {
-    name: 'JSON Schema Generator',
     path: '/json-schema-generator',
-    description: 'Generate JSON Schema from JSON data automatically.',
     categories: ['Code', 'Generator', 'Utility']
   },
   {
-    name: 'UUID Generator',
     path: '/uuid-generator',
-    description: 'Generate random UUIDs quickly and copy them to clipboard.',
     categories: ['Generator', 'Utility']
   },
   {
-    name: 'Base64 Encoder / Decoder',
     path: '/base64',
-    description: 'Encode or decode Base64 strings on the fly.',
     categories: ['Conversion', 'Utility']
   },
   {
-    name: 'JWT Decoder',
     path: '/jwt-decoder',
-    description: 'Decode and inspect the contents of a JWT token.',
     categories: ['Code', 'Utility']
   },
   {
-    name: 'Timestamp Converter',
     path: '/timestamp-converter',
-    description: 'Convert between Unix timestamps and readable date formats.',
     categories: ['Conversion', 'Utility']
   },
   {
-    name: 'Case Converter',
     path: '/case-converter',
-    description: 'Convert text to UPPER, lower, Title, camelCase, or snake_case.',
     categories: ['Text', 'Formatter']
   },
   {
-    name: 'Lorem Ipsum Generator',
     path: '/lorem-ipsum',
-    description: 'Generate placeholder paragraphs of lorem ipsum text.',
     categories: ['Generator', 'Text']
   },
   {
-    name: 'Regex Tester',
     path: '/regex-tester',
-    description: 'Test regular expressions against any input string.',
     categories: ['Code', 'Utility']
   },
   {
-    name: 'Color Converter',
     path: '/color-converter',
-    description: 'Convert between HEX, RGB, and HSL color formats easily.',
     categories: ['Conversion', 'Utility', 'Design']
   },
   {
-    name: 'Word Counter',
     path: '/word-counter',
-    description: 'Count words, characters, sentences, and get detailed text statistics.',
     categories: ['Text', 'Utility', 'Analyzer']
   },
   {
-    name: 'URL Encoder/Decoder',
     path: '/url-encoder',
-    description: 'Encode or decode URL components to make them valid for web addresses.',
     categories: ['Conversion', 'Web', 'Utility']
   },
   {
-    name: 'Hash Generator',
     path: '/hash-generator',
-    description: 'Generate MD5, SHA-1, SHA-256, SHA-512, SHA-3, and RIPEMD-160 hashes from any text.',
     categories: ['Security', 'Utility', 'Conversion']
   },
   {
-    name: 'QR Code Generator',
     path: '/qr-code-generator',
-    description: 'Generate customizable QR codes for URLs, text, contact information, and more.',
     categories: ['Generator', 'Web', 'Utility']
   },
   {
-    name: 'Diff Checker',
     path: '/diff-checker',
-    description: 'Compare two texts and highlight the differences between them.',
     categories: ['Code', 'Text', 'Analyzer']
   },
   {
-    name: 'API Tester',
     path: '/api-tester',
-    description: 'Test API endpoints with different HTTP methods, headers, and request bodies.',
     categories: ['Web', 'Developer', 'Utility']
   },
 ];

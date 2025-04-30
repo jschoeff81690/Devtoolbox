@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import { ChevronDownIcon, ChevronUpIcon } from './Icons';
 import { tools, getAllCategories } from '../data/toolsData';
+import { useTranslation } from 'react-i18next';
 
 interface ToolsDropdownProps {
   onSelect?: () => void;
@@ -14,6 +15,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
   const [isOpen, setIsOpen] = useState(false);
   const [activeView, setActiveView] = useState<'categories' | 'all'>('categories');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   
   // Get all categories except 'All'
   const categories = getAllCategories().filter(cat => cat !== 'All');
@@ -50,7 +52,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        Tools
+        {t('common.tools')}
         {isOpen ? (
           <ChevronUpIcon className="h-4 w-4" />
         ) : (
@@ -81,7 +83,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
                 }`}
                 onClick={() => setActiveView('categories')}
               >
-                By Category
+                {t('common.categories')}
               </button>
               <button 
                 className={`flex-1 text-center text-sm py-1 rounded-r ${
@@ -95,7 +97,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
                 }`}
                 onClick={() => setActiveView('all')}
               >
-                All Tools
+                {t('common.alltools')}
               </button>
             </div>
             
@@ -111,7 +113,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
                       <div className={`px-4 py-1 text-xs font-semibold ${
                         darkMode ? 'text-gray-400' : 'text-gray-500'
                       }`}>
-                        {category}
+                        {t(`categories.${category.toLowerCase()}`)}
                       </div>
                       {categoryTools.map(tool => (
                         <Link
@@ -124,7 +126,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
                           }`}
                           onClick={handleSelect}
                         >
-                          {tool.name}
+                          {t(`tools.${tool.path.substring(1).replace(/-/g, '')}.title`)}
                         </Link>
                       ))}
                     </div>
@@ -135,7 +137,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
               // All tools view (alphabetically sorted)
               <div className="py-1">
                 {[...tools]
-                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .sort((a, b) => a.path.localeCompare(b.path))
                   .map(tool => (
                     <Link
                       key={tool.path}
@@ -147,7 +149,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
                       }`}
                       onClick={handleSelect}
                     >
-                      {tool.name}
+                      {t(`tools.${tool.path.substring(1).replace(/-/g, '')}.title`)}
                     </Link>
                   ))
                 }
@@ -165,7 +167,7 @@ export default function ToolsDropdown({ onSelect, className = '' }: ToolsDropdow
               }`}
               onClick={handleSelect}
             >
-              View All Tools
+              {t('common.viewalltools')}
             </Link>
           </div>
         </div>

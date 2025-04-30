@@ -1,46 +1,47 @@
 import { useState } from 'react'
 import ToolLayout from '../components/ToolLayout'
+import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
+import { useTranslation } from 'react-i18next';
 
 const lorem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`
 
 export default function LoremIpsumGenerator() {
   const [count, setCount] = useState(3)
   const [output, setOutput] = useState('')
+  const { t } = useTranslation();
+  const toolName = 'loremipsum';
 
   const generate = () => {
     setOutput(Array(count).fill(lorem).join('\n\n'))
   }
 
   return (
-      <ToolLayout
-          title="Lorem Ipsum Generator"
-          metaContent="Generate placeholder paragraphs of lorem ipsum text."
-          path="/lorem-ipsum"
-        >
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Lorem Ipsum Generator</h1>
-      <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded">
-        <p className="mb-2"><strong>What it does:</strong> Generates placeholder "Lorem Ipsum" text commonly used in design and publishing.</p>
-        <p><strong>How to use:</strong> Select the number of paragraphs you want to generate (1-20), then click "Generate" to create the placeholder text.</p>
-      </div>
-      <div className="mb-2 flex items-center gap-2">
-        <label htmlFor="count">Paragraphs:</label>
-        <input
-          id="count"
-          type="number"
-          value={count}
-          onChange={(e) => setCount(parseInt(e.target.value))}
-          className="w-20 p-2 border rounded"
-          min={1}
-          max={20}
-        />
-        <button onClick={generate} className="bg-custom-light-blue hover:bg-custom-dark-blue text-white font-semibold py-2 px-4 rounded">
-          Generate
-        </button>
-      </div>
-      <textarea readOnly className="w-full h-64 p-2 border rounded" value={output} />
-    </div>
-        </ToolLayout>
+    <ToolLayout
+      toolName={toolName}
+      path="lorem-ipsum"
+    >
+      <ResponsiveToolContainer
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
+      >
+          <div className="mb-2 flex items-center gap-2">
+            <label htmlFor="count">{t(`tools.${toolName}.paragraphs`)}:</label>
+            <input
+              id="count"
+              type="number"
+              value={count}
+              onChange={(e) => setCount(parseInt(e.target.value))}
+              className="w-20 p-2 border rounded"
+              min={1}
+              max={20}
+            />
+            <button onClick={generate} className="bg-custom-light-blue hover:bg-custom-dark-blue text-white font-semibold py-2 px-4 rounded">
+              {t(`common.generate`)}
+            </button>
+          </div>
+          <textarea readOnly className="w-full h-64 p-2 border rounded" value={output} />
+      </ResponsiveToolContainer>
+    </ToolLayout>
   )
 }
 

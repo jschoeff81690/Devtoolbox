@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function UrlEncoder() {
   const { darkMode } = useDarkMode();
@@ -10,6 +11,8 @@ export default function UrlEncoder() {
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const { t } = useTranslation();
+  const toolName = 'urlencoder';
 
   // Handle encoding
   const handleEncode = () => {
@@ -82,14 +85,12 @@ export default function UrlEncoder() {
 
   return (
     <ToolLayout
-      title="URL Encoder/Decoder"
-      metaContent="Encode or decode URL components to make them valid for web addresses."
+      toolName={toolName}
       path="url-encoder"
     >
       <ResponsiveToolContainer
-        title="URL Encoder/Decoder"
-        description="Encode special characters for use in URLs or decode URL-encoded strings."
-        usage="Enter a string to encode or decode. URL encoding converts special characters to a format that can be transmitted over the Internet."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         {/* Mode Selection */}
         <div className="flex mb-4 border rounded-lg overflow-hidden">
@@ -105,7 +106,7 @@ export default function UrlEncoder() {
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Encode
+            {t(`tools.${toolName}.encodemode`)}
           </button>
           <button
             onClick={() => handleModeChange('decode')}
@@ -119,7 +120,7 @@ export default function UrlEncoder() {
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            Decode
+            {t(`tools.${toolName}.decodemode`)}
           </button>
         </div>
 
@@ -135,7 +136,7 @@ export default function UrlEncoder() {
             }`}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter URL-encoded text to decode...'}
+            placeholder={mode === 'encode' ? t(`tools.${toolName}.encodeplaceholder`) : t(`tools.${toolName}.decodeplaceholder`)}
           />
         </div>
 
@@ -149,7 +150,7 @@ export default function UrlEncoder() {
                 : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
           >
-            {mode === 'encode' ? 'Encode URL' : 'Decode URL'}
+            {mode === 'encode' ?  t(`tools.${toolName}.encodeurl`) : t(`tools.${toolName}.decodeurl`)}
           </button>
           <button
             onClick={handleSample}
@@ -159,7 +160,7 @@ export default function UrlEncoder() {
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
             }`}
           >
-            Sample Input
+            {t(`common.loadsample`)}
           </button>
           {output && (
             <>
@@ -171,7 +172,7 @@ export default function UrlEncoder() {
                     : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
                 }`}
               >
-                {copied ? 'Copied!' : 'Copy Result'}
+                {copied ? t(`common.copied`) : t(`common.copy`)}
               </button>
               <button
                 onClick={handleSwap}
@@ -181,7 +182,7 @@ export default function UrlEncoder() {
                     : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
                 }`}
               >
-                Use as Input
+                {t(`tools.${toolName}.useasinput`)}
               </button>
             </>
           )}
@@ -197,7 +198,7 @@ export default function UrlEncoder() {
         {/* Output Area */}
         {output && (
           <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium">Result</label>
+            <label className="block mb-2 text-sm font-medium"> {t(`common.result`)} </label>
             <div
               className={`w-full p-3 border rounded font-mono text-sm overflow-x-auto ${
                 darkMode 
@@ -214,10 +215,9 @@ export default function UrlEncoder() {
         <div className={`mt-6 p-4 rounded-lg ${
           darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-50 text-gray-700'
         }`}>
-          <h3 className="text-lg font-medium mb-2">About URL Encoding</h3>
+          <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.aboutencoding`)}</h3>
           <p className="text-sm mb-2">
-            URL encoding converts characters that are not allowed in URLs into a format that can be transmitted over the Internet.
-            It replaces unsafe ASCII characters with a "%" followed by two hexadecimal digits.
+            {t(`tools.${toolName}.encodingdetails`)}
           </p>
           <p className="text-sm">
             Common examples:

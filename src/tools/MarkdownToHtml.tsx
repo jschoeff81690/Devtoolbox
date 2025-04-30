@@ -5,11 +5,14 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import LineNumberedEditor from '../components/LineNumberedEditor';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function MarkdownToHtml() {
   const [markdown, setMarkdown] = useState('');
   const [html, setHtml] = useState('');
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const toolName = 'markdowntohtml';
   const livePreview = true
 
   // Live preview effect
@@ -112,31 +115,29 @@ function greet() {
 
   return (
     <ToolLayout
-      title="Markdown to HTML"
-      metaContent="Convert Markdown text to clean, readable HTML."
+      toolName={toolName}
       path="markdown-to-html"
     >
       <ResponsiveToolContainer
-        title="Markdown to HTML Converter"
-        description="Convert Markdown text to clean, readable HTML."
-        usage="Enter or paste your Markdown text in the input area, then click 'Convert to HTML' to see the HTML output and preview."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="flex justify-between items-center mb-2">
           <button
             onClick={loadSampleMarkdown}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Load Sample
+            {t('common.loadsample')}
           </button>
         </div>
         
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-medium mb-2">Markdown Input</h3>
+            <h3 className="text-lg font-medium mb-2">{t('common.input')}</h3>
             <LineNumberedEditor
               value={markdown}
               onChange={setMarkdown}
-              placeholder="Enter your Markdown here..."
+              placeholder={t(`tools.${toolName}.inputplaceholder`)}
               language="markdown"
               height="500px"
             />
@@ -144,7 +145,7 @@ function greet() {
           
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-lg font-medium">Preview</h3>
+              <h3 className="text-lg font-medium">{t(`tools.${toolName}.preview`)}</h3>
             </div>
             
             <div 
@@ -158,7 +159,7 @@ function greet() {
                 </div>
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-400">
-                  Preview will appear here
+                  {t(`tools.${toolName}.previewplaceholder`)}
                 </div>
               )}
             </div>
@@ -168,12 +169,12 @@ function greet() {
         {html && (
           <div className="mt-6">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-lg font-medium">HTML Output</h3>
+              <h3 className="text-lg font-medium">{t(`tools.${toolName}.htmloutput`)}</h3>
               <button
                 onClick={() => navigator.clipboard.writeText(html)}
                 className="text-sm px-3 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
               >
-                Copy HTML
+                {t('common.copy')}
               </button>
             </div>
             <div className={`border rounded p-2 overflow-x-auto ${

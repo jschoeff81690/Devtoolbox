@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 interface TextStats {
   characters: number;
@@ -14,6 +15,8 @@ interface TextStats {
 
 export default function WordCounter() {
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const toolName = 'wordcounter';
   const [text, setText] = useState('');
   const [stats, setStats] = useState<TextStats>({
     characters: 0,
@@ -87,14 +90,12 @@ How quickly daft jumping zebras vex! The five boxing wizards jump quickly.`);
 
   return (
     <ToolLayout
-      title="Word Counter"
-      metaContent="Count words, characters, sentences, and get detailed text statistics."
+      toolName={toolName}
       path="word-counter"
     >
       <ResponsiveToolContainer
-        title="Word Counter & Text Analyzer"
-        description="Count words, characters, sentences, and get detailed text statistics."
-        usage="Paste or type your text in the box below to see real-time statistics about your content."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         {/* Text Input Area */}
         <div className="mb-4">
@@ -105,7 +106,7 @@ How quickly daft jumping zebras vex! The five boxing wizards jump quickly.`);
             }`}
             value={text}
             onChange={handleTextChange}
-            placeholder="Type or paste your text here..."
+            placeholder={t(`tools.${toolName}.placeholder`)}
           />
         </div>
 
@@ -119,7 +120,7 @@ How quickly daft jumping zebras vex! The five boxing wizards jump quickly.`);
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
             }`}
           >
-            Clear Text
+            {t('common.clear')}
           </button>
           <button
             onClick={handleSampleText}
@@ -129,7 +130,7 @@ How quickly daft jumping zebras vex! The five boxing wizards jump quickly.`);
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
             }`}
           >
-            Sample Text
+            {t('common.loadsample')}
           </button>
         </div>
 
@@ -138,49 +139,49 @@ How quickly daft jumping zebras vex! The five boxing wizards jump quickly.`);
           darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'
         }`}>
           <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-medium">Text Statistics</h3>
+            <h3 className="text-lg font-medium">{t(`tools.${toolName}.statistics`)}</h3>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Characters</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.characters`)}</div>
               <div className="text-2xl font-semibold">{stats.characters}</div>
             </div>
             
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Characters (no spaces)</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.charactersnospaces`)}</div>
               <div className="text-2xl font-semibold">{stats.charactersNoSpaces}</div>
             </div>
             
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Words</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.words`)}</div>
               <div className="text-2xl font-semibold">{stats.words}</div>
             </div>
             
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Sentences</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.sentences`)}</div>
               <div className="text-2xl font-semibold">{stats.sentences}</div>
             </div>
             
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Paragraphs</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.paragraphs`)}</div>
               <div className="text-2xl font-semibold">{stats.paragraphs}</div>
             </div>
             
             <div className={`p-3 rounded ${
               darkMode ? 'bg-gray-700' : 'bg-white border border-gray-200'
             }`}>
-              <div className="text-sm opacity-75">Reading Time</div>
+              <div className="text-sm opacity-75">{t(`tools.${toolName}.readingtime`)}</div>
               <div className="text-2xl font-semibold">{stats.readingTime} min</div>
             </div>
           </div>

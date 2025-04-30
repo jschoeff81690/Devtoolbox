@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 export type ToolCategory = 
   | 'All' 
@@ -27,6 +28,7 @@ export default function CategoryFilter({
   categories 
 }: CategoryFilterProps) {
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
   
   return (
     <div className="flex flex-wrap gap-2 mb-4">
@@ -44,7 +46,7 @@ export default function CategoryFilter({
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
-          {category}
+          {t(`categories.${category.toLowerCase()}`)}
         </button>
       ))}
     </div>

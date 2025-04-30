@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 // Color conversion functions
 const hexToRgb = (hex: string): { r: number; g: number; b: number } | null => {
@@ -101,6 +102,8 @@ export default function ColorConverter() {
   const [hsl, setHsl] = useState({ h: 210, s: 100, l: 56 });
   const [error, setError] = useState('');
   const [activeColor, setActiveColor] = useState(hex);
+  const { t } = useTranslation();
+  const toolName = 'colorconverter';
 
   // Update RGB and HSL when HEX changes
   const updateFromHex = (hexValue: string) => {
@@ -192,14 +195,12 @@ export default function ColorConverter() {
 
   return (
     <ToolLayout
-      title="Color Converter"
-      metaContent="Convert between HEX, RGB, and HSL color formats easily."
+      toolName={toolName}
       path="color-converter"
     >
       <ResponsiveToolContainer
-        title="Color Converter"
-        description="Convert between different color formats including HEX, RGB, and HSL."
-        usage="Enter a color in any format and see its equivalent in other formats. Click on any value to copy it to clipboard."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         {/* Color Preview */}
         <div className="mb-6 flex flex-col sm:flex-row items-center gap-4">
@@ -210,7 +211,7 @@ export default function ColorConverter() {
           ></div>
           
           <div className="flex-1">
-            <h3 className="text-lg font-medium mb-2">Current Color</h3>
+            <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.current`)}</h3>
             <div className="flex flex-wrap gap-2">
               <button 
                 onClick={() => copyToClipboard(hex)}
@@ -260,7 +261,7 @@ export default function ColorConverter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* HEX Input */}
           <div>
-            <label className="block mb-2 text-sm font-medium">HEX Color</label>
+            <label className="block mb-2 text-sm font-medium">{t(`tools.${toolName}.hex`)}</label>
             <div className="flex">
               <input
                 type="text"
@@ -282,7 +283,7 @@ export default function ColorConverter() {
 
           {/* RGB Input */}
           <div>
-            <label className="block mb-2 text-sm font-medium">RGB Color</label>
+            <label className="block mb-2 text-sm font-medium">{t(`tools.${toolName}.rgb`)}</label>
             <div className="grid grid-cols-3 gap-2">
               <input
                 type="number"
@@ -322,7 +323,7 @@ export default function ColorConverter() {
 
           {/* HSL Input */}
           <div>
-            <label className="block mb-2 text-sm font-medium">HSL Color</label>
+            <label className="block mb-2 text-sm font-medium">{t(`tools.${toolName}.hsl`)}</label>
             <div className="grid grid-cols-3 gap-2">
               <input
                 type="number"

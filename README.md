@@ -61,6 +61,28 @@ npm run build
 yarn build
 ```
 
+## Translation Management
+
+### Check for Missing Translations
+
+To check for missing translations in the codebase:
+
+```bash
+node scripts/check-translations.js
+```
+
+This will scan all JSX/TSX files for translation keys and verify they exist in the English locale file.
+
+### Generate Missing Translation Template
+
+To generate a template with missing translations:
+
+```bash
+node scripts/generate-missing-translations.js
+```
+
+This will create a `missing-translations.json` file that can be used to update the locale files.
+
 ## Technologies Used
 
 - React
@@ -68,6 +90,7 @@ yarn build
 - Tailwind CSS
 - Vite
 - React Router
+- i18next for internationalization
 
 ## License
 

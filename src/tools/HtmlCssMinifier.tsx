@@ -3,11 +3,14 @@ import ToolLayout from '../components/ToolLayout'
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer'
 import LineNumberedEditor from '../components/LineNumberedEditor'
 import LineNumberedOutput from '../components/LineNumberedOutput'
+import { useTranslation } from 'react-i18next'
 
 export default function HtmlCssMinifier() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [language, setLanguage] = useState<'html' | 'css'>('html')
+  const { t } = useTranslation()
+  const toolName = 'htmlcssminifier'
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -143,30 +146,28 @@ header li {
 
   return (
     <ToolLayout
-      title="HTML/CSS Minifier"
-      metaContent="Minify your HTML and CSS code quickly and efficiently."
+      toolName={toolName}
       path="html-css-minifier"
     >
       <ResponsiveToolContainer
-        title="HTML/CSS Minifier"
-        description="Reduces the size of HTML and CSS files by removing unnecessary characters like whitespace, comments, and line breaks."
-        usage="Paste your HTML or CSS code in the editor below. The tool will automatically minify it. You can copy the minified code using the copy button."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center space-x-4">
-            <h3 className="text-lg font-medium">Input</h3>
+            <h3 className="text-lg font-medium">{t('common.input')}</h3>
             <div className="flex border rounded overflow-hidden">
               <button 
                 className={`px-3 py-1 ${language === 'html' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100'}`}
                 onClick={() => setLanguage('html')}
               >
-                HTML
+                {t(`tools.${toolName}.htmlmode`)}
               </button>
               <button 
                 className={`px-3 py-1 ${language === 'css' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100'}`}
                 onClick={() => setLanguage('css')}
               >
-                CSS
+                {t(`tools.${toolName}.cssmode`)}
               </button>
             </div>
           </div>
@@ -174,19 +175,19 @@ header li {
             onClick={loadSample}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Load Sample
+            {t('common.loadsample')}
           </button>
         </div>
         
         <LineNumberedEditor
           value={input}
           onChange={setInput}
-          placeholder={`Paste your ${language.toUpperCase()} code here...`}
+          placeholder={`${t('common.paste')} ${language.toUpperCase()} ${t('common.codehere')}...`}
           language={language}
           height="250px"
         />
         
-        <h3 className="text-lg font-medium mt-6 mb-2">Minified Output</h3>
+        <h3 className="text-lg font-medium mt-6 mb-2">{t(`tools.${toolName}.minifiedoutput`)}</h3>
         <LineNumberedOutput
           content={output}
           language={language}
@@ -196,11 +197,11 @@ header li {
         
         <div className="mt-4">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <span>Original size: {input.length} characters</span>
+            <span>{t(`tools.${toolName}.originalsize`)}: {input.length} {t(`tools.${toolName}.characters`)}</span>
             <span>•</span>
-            <span>Minified size: {output.length} characters</span>
+            <span>{t(`tools.${toolName}.minifiedsize`)}: {output.length} {t(`tools.${toolName}.characters`)}</span>
             <span>•</span>
-            <span>Saved: {input.length > 0 ? Math.round((1 - output.length / input.length) * 100) : 0}%</span>
+            <span>{t(`tools.${toolName}.saved`)}: {input.length > 0 ? Math.round((1 - output.length / input.length) * 100) : 0}%</span>
           </div>
         </div>
       </ResponsiveToolContainer>

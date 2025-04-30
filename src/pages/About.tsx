@@ -1,30 +1,54 @@
+import { useTranslation } from 'react-i18next';
+
 export default function About() {
+  const { t } = useTranslation();
+  
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-800">About Devtoolbox</h1>
+      <h1 className="text-2xl font-bold text-gray-800">{t('pages.about.title')}</h1>
       <p>
-        Devtoolbox is a collection of developer utilities built to streamline daily tasks like formatting,
-        converting, decoding, and generating data. All tools are free and run entirely in your browser.
+        {t('pages.about.description')}
       </p>
+      <h2 className="text-xl font-semibold text-gray-800 mt-6">{t('pages.about.purpose')}</h2>
+      <p>
+        {t('pages.about.purpose')}
+      </p>
+      <h2 className="text-xl font-semibold text-gray-800 mt-6">{t('pages.about.features')}</h2>
       <ul className="list-disc list-inside space-y-1">
-        <li><strong>JSON Formatter & Validator</strong>: Format and validate JSON data for readability and correctness.</li>
-        <li><strong>UUID Generator</strong>: Generate random UUIDs quickly and copy them to the clipboard.</li>
-        <li><strong>Base64 Encoder / Decoder</strong>: Encode or decode Base64 strings on the fly.</li>
-        <li><strong>JWT Decoder</strong>: Decode and inspect the contents of a JWT token.</li>
-        <li><strong>Timestamp Converter</strong>: Convert between Unix timestamps and readable date formats.</li>
-        <li><strong>Case Converter</strong>: Convert text to UPPER, lower, Title, camelCase, or snake_case.</li>
-        <li><strong>Lorem Ipsum Generator</strong>: Generate placeholder paragraphs of lorem ipsum text.</li>
-        <li><strong>Regex Tester</strong>: Test regular expressions against any input string.</li>
-        <li><strong>Markdown to HTML Converter</strong>: Convert your Markdown text to clean, readable HTML with live preview.</li>
-        <li><strong>HTML/CSS Minifier</strong>: Minify your HTML and CSS code quickly and efficiently.</li>
-        <li><strong>Diff Checker</strong>: Compare text, JSON, or code to identify differences.</li>
-        <li><strong>String Hashing Tool</strong>: Generate hashes like MD5, SHA256, etc., for your strings.</li>
-        <li><strong>Color Picker with HEX/RGB Converter</strong>: Select colors and convert between HEX and RGB formats.</li>
-        <li><strong>Bash Script Beautifier</strong>: Format and beautify your Bash scripts for better readability.</li>
-        <li><strong>Gzip/Deflate Compression Tool</strong>: Compress your files using Gzip or Deflate algorithms.</li>
-        <li><strong>URL Parser & Decoder</strong>: Parse and decode URLs to extract components and parameters.</li>
-        <li><strong>Sitemap Extractor</strong>: Extract and analyze XML sitemaps from URLs or uploaded files.</li>
+        <li><strong>{t('tools.jsonformatter.title')}</strong>: {t('tools.jsonformatter.description')}</li>
+        <li><strong>{t('tools.jsonschemagenerator.title')}</strong>: {t('tools.jsonschemagenerator.description')}</li>
+        <li><strong>{t('tools.uuidgenerator.title')}</strong>: {t('tools.uuidgenerator.description')}</li>
+        <li><strong>{t('tools.base64.title')}</strong>: {t('tools.base64.description')}</li>
+        <li><strong>{t('tools.jwtdecoder.title')}</strong>: {t('tools.jwtdecoder.description')}</li>
+        <li><strong>{t('tools.timestampconverter.title')}</strong>: {t('tools.timestampconverter.description')}</li>
+        <li><strong>{t('tools.caseconverter.title')}</strong>: {t('tools.caseconverter.description')}</li>
+        <li><strong>{t('tools.loremipsum.title')}</strong>: {t('tools.loremipsum.description')}</li>
+        <li><strong>{t('tools.regextester.title')}</strong>: {t('tools.regextester.description')}</li>
+        <li><strong>{t('tools.markdowntohtml.title')}</strong>: {t('tools.markdowntohtml.description')}</li>
+        <li><strong>{t('tools.htmlcssminifier.title')}</strong>: {t('tools.htmlcssminifier.description')}</li>
+        <li><strong>{t('tools.colorconverter.title')}</strong>: {t('tools.colorconverter.description')}</li>
+        <li><strong>{t('tools.wordcounter.title')}</strong>: {t('tools.wordcounter.description')}</li>
+        <li><strong>{t('tools.urlencoder.title')}</strong>: {t('tools.urlencoder.description')}</li>
+        <li><strong>{t('tools.hashgenerator.title')}</strong>: {t('tools.hashgenerator.description')}</li>
+        <li><strong>{t('tools.qrcodegenerator.title')}</strong>: {t('tools.qrcodegenerator.description')}</li>
+        <li><strong>{t('tools.diffchecker.title')}</strong>: {t('tools.diffchecker.description')}</li>
+        <li><strong>{t('tools.apitester.title')}</strong>: {t('tools.apitester.description')}</li>
       </ul>
+      
+      <h2 className="text-xl font-semibold text-gray-800 mt-6">{t('pages.about.technologies')}</h2>
+      <ul className="list-disc list-inside space-y-1">
+        <li>React</li>
+        <li>TypeScript</li>
+        <li>Tailwind CSS</li>
+        <li>Vite</li>
+        <li>React Router</li>
+        <li>i18next</li>
+      </ul>
+      
+      <h2 className="text-xl font-semibold text-gray-800 mt-6">{t('pages.about.feedback')}</h2>
+      <p>
+        {t('pages.about.feedbacktext')}
+      </p>
     </div>
   )
 }

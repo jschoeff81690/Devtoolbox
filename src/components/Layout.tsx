@@ -5,7 +5,9 @@ import { useSearch } from '../context/SearchContext'
 import { MoonIcon, SunIcon, MenuIcon, CloseIcon } from './Icons'
 import ToolsDropdown from './ToolsDropdown'
 import SearchBar from './SearchBar'
+import LanguageSelector from './LanguageSelector'
 import { tools } from '../data/toolsData'
+import { useTranslation } from 'react-i18next'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -13,6 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   
   // Clear search when navigating to a tool page
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-4 sm:gap-6">
             <Link to="/" className="flex items-center gap-2 text-xl font-bold text-blue-100">
               <img src={`${import.meta.env.BASE_URL}devtoolbox-logo.png`} alt="Devtoolbox logo" className="h-8 w-8 rounded" />
-              <span className="hidden sm:inline">Devtoolbox</span>
+              <span className="hidden sm:inline">{t('common.appName')}</span>
             </Link>
             <div className="hidden sm:block">
               <ToolsDropdown />
@@ -60,16 +63,18 @@ export default function Layout({ children }: { children: ReactNode }) {
             <SearchBar 
               searchTerm={searchTerm} 
               setSearchTerm={handleSearch} 
-              placeholder="Search tools..."
+              placeholder={t('common.search')}
               className="w-full"
             />
           </div>
           
           <div className="flex items-center gap-2">
+            <LanguageSelector />
+            
             <button 
               onClick={toggleDarkMode}
               className="p-2 rounded-full text-blue-100 hover:text-white hover:bg-blue-800"
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              aria-label={darkMode ? t('common.lightMode') : t('common.darkMode')}
             >
               {darkMode ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
             </button>
@@ -93,7 +98,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <SearchBar 
               searchTerm={searchTerm} 
               setSearchTerm={handleSearch} 
-              placeholder="Search tools..."
+              placeholder={t('common.search')}
             />
           </div>
           
@@ -103,7 +108,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               className={`block px-3 py-2 rounded-md text-base font-medium ${darkMode ? 'text-gray-100 hover:bg-gray-700' : 'text-gray-900 hover:bg-gray-100'}`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              All Tools
+              {t('common.tools')}
             </Link>
             
             <div className={`my-1 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}></div>
@@ -120,7 +125,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {tool.name}
+                {t(`tools.${tool.path.substring(1).replace(/-/g, '')}.title`)}
               </Link>
             ))}
             
@@ -136,7 +141,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              About
+              {t('common.about')}
             </Link>
             <Link 
               to="/contact" 
@@ -147,7 +152,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Contact
+              {t('common.contact')}
             </Link>
             <Link 
               to="/privacy" 
@@ -158,7 +163,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Privacy Policy
+              {t('common.privacy')}
             </Link>
           </div>
         </div>
@@ -185,19 +190,19 @@ export default function Layout({ children }: { children: ReactNode }) {
               to="/about" 
               className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
             >
-              About
+              {t('common.about')}
             </Link>
             <Link 
               to="/contact" 
               className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
             >
-              Contact
+              {t('common.contact')}
             </Link>
             <Link 
               to="/privacy" 
               className={`hover:underline ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-700'}`}
             >
-              Privacy Policy
+              {t('common.privacy')}
             </Link>
           </div>
         </div>

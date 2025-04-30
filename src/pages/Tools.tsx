@@ -4,11 +4,13 @@ import { useDarkMode } from '../context/DarkModeContext';
 import { useSearch } from '../context/SearchContext';
 import CategoryFilter, { ToolCategory } from '../components/CategoryFilter';
 import { tools, getAllCategories } from '../data/toolsData';
+import { useTranslation } from 'react-i18next';
 
 export default function Tools() {
   const { darkMode } = useDarkMode();
   const { searchTerm, setSearchTerm } = useSearch();
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory>('All');
+  const { t } = useTranslation();
   
   const categories = useMemo(() => getAllCategories(), []);
   
@@ -25,10 +27,15 @@ export default function Tools() {
   
   const filteredTools = useMemo(() => {
     return tools.filter(tool => {
+      // Get translated name and description
+      const toolKey = tool.path.substring(1).replace(/-/g, '');
+      const translatedName = t(`tools.${toolKey}.title`);
+      const translatedDescription = t(`tools.${toolKey}.description`);
+      
       // Filter by search term
       const matchesSearch = 
-        tool.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        tool.description.toLowerCase().includes(searchTerm.toLowerCase());
+        translatedName.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        translatedDescription.toLowerCase().includes(searchTerm.toLowerCase());
       
       // Filter by category
       const matchesCategory = 
@@ -37,12 +44,12 @@ export default function Tools() {
       
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, t]);
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <h1 className="text-2xl font-bold">Tools</h1>
+        <h1 className="text-2xl font-bold">{t('pages.tools.title')}</h1>
       </div>
       
       <CategoryFilter 
@@ -55,7 +62,7 @@ export default function Tools() {
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredTools.map((tool) => (
             <li 
-              key={tool.name} 
+              key={tool.path} 
               className={`p-4 border rounded-lg ${
                 darkMode 
                   ? 'bg-gray-800 border-gray-700 hover:border-gray-600' 
@@ -63,22 +70,22 @@ export default function Tools() {
               } shadow-sm hover:shadow-md transition`}
             >
               <Link to={tool.path} className={`text-xl ${darkMode ? 'text-blue-400' : 'text-custom-dark-blue'} font-semibold hover:underline`}>
-                {tool.name}
+                {t(`tools.${tool.path.substring(1).replace(/-/g, '')}.title`)}
               </Link>
               <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} text-sm mt-1`}>
-                {tool.description}
+                {t(`tools.${tool.path.substring(1).replace(/-/g, '')}.description`)}
               </p>
               <div className="flex flex-wrap gap-1 mt-2">
                 {tool.categories.map(category => (
                   <span 
-                    key={`${tool.name}-${category}`}
+                    key={`${tool.path}-${category}`}
                     className={`text-xs px-2 py-0.5 rounded-full ${
                       darkMode 
                         ? 'bg-gray-700 text-gray-300' 
                         : 'bg-gray-100 text-gray-600'
                     }`}
                   >
-                    {category}
+                    {t(`categories.${category.toLowerCase()}`)}
                   </span>
                 ))}
               </div>
@@ -87,8 +94,8 @@ export default function Tools() {
         </ul>
       ) : (
         <div className={`p-8 text-center ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-          <p className="text-lg font-medium">No tools found</p>
-          <p className="mt-2">Try adjusting your search or filter criteria</p>
+          <p className="text-lg font-medium">{t('pages.tools.notoolsfound')}</p>
+          <p className="mt-2">{t('pages.tools.adjustsearch')}</p>
         </div>
       )}
     </div>

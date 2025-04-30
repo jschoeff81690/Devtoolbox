@@ -4,13 +4,16 @@ import ResponsiveToolContainer from '../components/ResponsiveToolContainer'
 import LineNumberedEditor from '../components/LineNumberedEditor'
 import LineNumberedOutput from '../components/LineNumberedOutput'
 import { useDarkMode } from '../context/DarkModeContext'
+import { useTranslation } from 'react-i18next'
 
 export default function JsonFormatter() {
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
   const { darkMode } = useDarkMode()
+  const { t } = useTranslation()
   const autoFormat = true
+  const toolName = 'jsonformatter'
 
   // Auto-format when enabled
   useEffect(() => {
@@ -42,31 +45,29 @@ export default function JsonFormatter() {
 
   return (
     <ToolLayout
-      title="JSON Formatter"
-      metaContent="Format, validate, and visualize your JSON data in a readable format."
+      toolName={toolName}
       path="json-formatter"
     >
       <ResponsiveToolContainer
-        title="JSON Formatter & Validator"
-        description="Formats and validates your JSON data to make it readable and properly structured."
-        usage="Paste your minified or unformatted JSON in the text area below, then click 'Format JSON' to convert it into a properly indented, readable format."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="flex justify-between items-center mb-2">
           <button
             onClick={loadSample}
             className="text-sm px-2 py-1 rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Load Sample
+            {t('common.loadsample')}
           </button>
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-medium mb-2">Input JSON</h3>
+            <h3 className="text-lg font-medium mb-2">{t('common.input')}</h3>
             <LineNumberedEditor
               value={input}
               onChange={setInput}
-              placeholder="Paste your JSON here..."
+              placeholder={t(`tools.${toolName}.inputplaceholder`)}
               language="json"
               height="350px"
             />
@@ -74,12 +75,12 @@ export default function JsonFormatter() {
           
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-lg font-medium">Formatted JSON</h3>
+              <h3 className="text-lg font-medium">{t(`tools.${toolName}.formattedjson`)}</h3>
             </div>
             
             {error ? (
               <div className={`p-4 rounded border ${darkMode ? 'bg-red-900/20 border-red-800' : 'bg-red-100 border-red-300'}`}>
-                <p className="text-red-500 font-medium">Error</p>
+                <p className="text-red-500 font-medium">{t('common.error')}</p>
                 <p className="text-sm">{error}</p>
               </div>
             ) : (
@@ -96,4 +97,3 @@ export default function JsonFormatter() {
     </ToolLayout>
   )
 }
-

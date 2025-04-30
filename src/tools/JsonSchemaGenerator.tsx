@@ -4,6 +4,7 @@ import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
 import LineNumberedEditor from '../components/LineNumberedEditor';
 import LineNumberedOutput from '../components/LineNumberedOutput';
+import { useTranslation } from 'react-i18next';
 
 export default function JsonSchemaGenerator() {
   const [input, setInput] = useState('');
@@ -18,6 +19,8 @@ export default function JsonSchemaGenerator() {
     description: '',
   });
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const toolName = 'jsonschemagenerator';
 
   const generateSchema = () => {
     try {
@@ -80,38 +83,36 @@ export default function JsonSchemaGenerator() {
 
   return (
     <ToolLayout
-      title="JSON Schema Generator"
-      metaContent="Generate JSON Schema from JSON data automatically."
+      toolName={toolName}
       path="json-schema-generator"
     >
       <ResponsiveToolContainer
-        title="JSON Schema Generator"
-        description="Automatically generate JSON Schema (draft 2020-12) from your JSON data."
-        usage="Paste your JSON in the input area, configure the options, and click 'Generate Schema' to create a JSON Schema that describes your data structure."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="flex flex-col md:flex-row gap-4 mb-4">
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
-              <label className="font-medium">JSON Input</label>
+              <label className="font-medium">{t('common.input')}</label>
               <button
                 onClick={loadSampleData}
                 className={`text-sm px-2 py-1 rounded ${
                   darkMode ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
-                Load Sample
+                {t('common.loadsample')}
               </button>
             </div>
             <LineNumberedEditor
               value={input}
               onChange={setInput}
-              placeholder="Paste your JSON here..."
+              placeholder={t(`tools.${toolName}.description`)}
               language="json"
               height="300px"
             />
           </div>
           <div className="flex-1">
-            <label className="font-medium block mb-2">Generated JSON Schema</label>
+            <label className="font-medium block mb-2">{t('common.output')}</label>
             <LineNumberedOutput
               content={output}
               language="json"
@@ -124,7 +125,7 @@ export default function JsonSchemaGenerator() {
         <div className={`mb-4 p-4 border rounded-md ${
           darkMode ? 'bg-gray-800 border-gray-700' : 'bg-blue-50 border-blue-200'
         }`}>
-          <h3 className="font-medium mb-2">Schema Options</h3>
+          <h3 className="font-medium mb-2">{t('common.options')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div className="flex items-center mb-2">
@@ -208,7 +209,7 @@ export default function JsonSchemaGenerator() {
                 : 'bg-custom-light-blue text-white hover:bg-custom-dark-blue'
             }`}
           >
-            Generate Schema
+            {t('common.generate')}
           </button>
           {error && <span className="text-red-500 text-sm">{error}</span>}
         </div>

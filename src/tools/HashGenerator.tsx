@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next'
 
 // Import crypto-js components
 import MD5 from 'crypto-js/md5';
@@ -26,6 +27,8 @@ export default function HashGenerator() {
     'md5', 'sha1', 'sha256'
   ]);
   const [copied, setCopied] = useState<string | null>(null);
+  const { t } = useTranslation()
+  const toolName = 'hashgenerator'
 
   // Available hash algorithms
   const algorithms: { value: HashAlgorithm; label: string; description: string }[] = [
@@ -128,14 +131,12 @@ export default function HashGenerator() {
 
   return (
     <ToolLayout
-      title="Hash Generator"
-      metaContent="Generate MD5, SHA-1, SHA-256, SHA-512, SHA-3, and RIPEMD-160 hashes from any text."
+      toolName={toolName}
       path="hash-generator"
     >
       <ResponsiveToolContainer
-        title="Hash Generator"
-        description="Generate cryptographic hash values from text using various algorithms."
-        usage="Enter text, select hash algorithms, and click 'Generate Hashes' to create hash values."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         {/* Input Area */}
         <div className="mb-4">
@@ -189,7 +190,7 @@ export default function HashGenerator() {
                   : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
           >
-            Generate Hashes
+            {t(`tools.${toolName}.generate`)}
           </button>
           <button
             onClick={clearAll}
@@ -199,7 +200,7 @@ export default function HashGenerator() {
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
             }`}
           >
-            Clear All
+            {t(`tools.${toolName}.clear`)}
           </button>
           <button
             onClick={useSampleText}
@@ -209,7 +210,7 @@ export default function HashGenerator() {
                 : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
             }`}
           >
-            Sample Text
+            {t(`tools.${toolName}.sample`)}
           </button>
         </div>
 
@@ -262,9 +263,9 @@ export default function HashGenerator() {
         <div className={`mt-6 p-4 rounded-lg ${
           darkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-50 text-gray-700'
         }`}>
-          <h3 className="text-lg font-medium mb-2">About Hash Functions</h3>
+          <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.about`)}</h3>
           <p className="text-sm mb-2">
-            Hash functions convert data of arbitrary size to a fixed-size string. They are designed to be:
+            {t(`tools.${toolName}.about`)}
           </p>
           <ul className="list-disc list-inside text-sm space-y-1 mb-2">
             <li>One-way (impossible to reverse)</li>
@@ -273,7 +274,7 @@ export default function HashGenerator() {
             <li>Resistant to collisions (different inputs producing same hash)</li>
           </ul>
           <p className="text-sm">
-            <strong>Security note:</strong> MD5 and SHA-1 are considered cryptographically broken and should not be used for security purposes.
+            <strong>{t(`tools.${toolName}.securitynote`)}:</strong> {t(`tools.${toolName}.hashwarning`)}
           </p>
         </div>
       </ResponsiveToolContainer>

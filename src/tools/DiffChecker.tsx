@@ -4,9 +4,12 @@ import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import LineNumberedEditor from '../components/LineNumberedEditor';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function DiffChecker() {
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const toolName = 'diffchecker';
   const [leftText, setLeftText] = useState('');
   const [rightText, setRightText] = useState('');
   const [diffResult, setDiffResult] = useState<Change[]>([]);
@@ -83,7 +86,7 @@ console.log('Total: $' + total);`);
         <div className={`flex items-center justify-center h-64 ${
           darkMode ? 'text-gray-400' : 'text-gray-500'
         }`}>
-          Enter text in both panels to see the differences
+          {t(`tools.${toolName}.entertoview`)}
         </div>
       );
     }
@@ -230,27 +233,25 @@ console.log('Total: $' + total);`);
 
   return (
     <ToolLayout
-      title="Diff Checker"
-      metaContent="Compare two texts and highlight the differences between them."
+      toolName={toolName}
       path="diff-checker"
     >
       <ResponsiveToolContainer
-        title="Diff Checker"
-        description="Compare two texts and highlight the differences between them."
-        usage="Enter or paste text in both panels, then view the differences highlighted below."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="flex flex-wrap gap-4 mb-4">
           <button
             onClick={loadSampleData}
             className="px-3 py-1 text-sm rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Load Sample
+            {t('common.loadsample')}
           </button>
           <button
             onClick={clearAll}
             className="px-3 py-1 text-sm rounded bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
-            Clear All
+            {t('common.clear')}
           </button>
           
           <div className="flex items-center ml-auto">
@@ -261,7 +262,7 @@ console.log('Total: $' + total);`);
                 onChange={(e) => setIgnoreCase(e.target.checked)}
                 className="mr-1"
               />
-              Ignore Case
+              {t(`tools.${toolName}.ignorecase`)}
             </label>
             <label className="flex items-center mr-4 text-sm">
               <input
@@ -270,7 +271,7 @@ console.log('Total: $' + total);`);
                 onChange={(e) => setIgnoreWhitespace(e.target.checked)}
                 className="mr-1"
               />
-              Ignore Whitespace
+              {t(`tools.${toolName}.ignorewhitespace`)}
             </label>
             <label className="flex items-center mr-4 text-sm">
               <input
@@ -279,7 +280,7 @@ console.log('Total: $' + total);`);
                 onChange={(e) => setShowLineNumbers(e.target.checked)}
                 className="mr-1"
               />
-              Line Numbers
+              {t('common.linenumbers')}
             </label>
             <select
               value={diffView}
@@ -290,29 +291,29 @@ console.log('Total: $' + total);`);
                   : 'bg-gray-50 border border-gray-300 text-gray-900'
               }`}
             >
-              <option value="side-by-side">Side by Side</option>
-              <option value="inline">Inline</option>
+              <option value="side-by-side">{t(`tools.${toolName}.sidebyside`)}</option>
+              <option value="inline">{t(`tools.${toolName}.linediff`)}</option>
             </select>
           </div>
         </div>
         
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="flex-1">
-            <h3 className="text-lg font-medium mb-2">Original Text</h3>
+            <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.original`)}</h3>
             <LineNumberedEditor
               value={leftText}
               onChange={setLeftText}
-              placeholder="Enter or paste original text here..."
+              placeholder={t(`tools.${toolName}.originalplaceholder`)}
               language="plaintext"
               height="250px"
             />
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-medium mb-2">Modified Text</h3>
+            <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.modified`)}</h3>
             <LineNumberedEditor
               value={rightText}
               onChange={setRightText}
-              placeholder="Enter or paste modified text here..."
+              placeholder={t(`tools.${toolName}.modifiedplaceholder`)}
               language="plaintext"
               height="250px"
             />
@@ -320,7 +321,7 @@ console.log('Total: $' + total);`);
         </div>
         
         <div className="mt-6">
-          <h3 className="text-lg font-medium mb-2">Differences</h3>
+          <h3 className="text-lg font-medium mb-2">{t(`tools.${toolName}.differences`)}</h3>
           <div className="h-[400px] overflow-auto">
             {renderDiff()}
           </div>

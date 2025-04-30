@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 
 interface SearchBarProps {
   searchTerm: string;
@@ -11,10 +12,11 @@ interface SearchBarProps {
 export default function SearchBar({ 
   searchTerm, 
   setSearchTerm, 
-  placeholder = "Search tools...",
+  placeholder = "Search",
   className = ""
 }: SearchBarProps) {
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
   
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -59,7 +61,7 @@ export default function SearchBar({
           type="button"
           className="absolute inset-y-0 right-0 flex items-center pr-3"
           onClick={() => setSearchTerm('')}
-          aria-label="Clear search"
+          aria-label={t('common.clear')}
         >
           <svg 
             className={`w-4 h-4 ${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`} 

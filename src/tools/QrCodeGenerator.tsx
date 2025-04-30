@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ToolLayout from '../components/ToolLayout';
 import ResponsiveToolContainer from '../components/ResponsiveToolContainer';
 import { useDarkMode } from '../context/DarkModeContext';
+import { useTranslation } from 'react-i18next';
 import QRCode from 'qrcode';
 
 export default function QrCodeGenerator() {
@@ -31,6 +32,8 @@ export default function QrCodeGenerator() {
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
+  const toolName = 'qrcodegenerator';
 
   useEffect(() => {
     generateQRCode();
@@ -105,7 +108,7 @@ export default function QrCodeGenerator() {
       }
     } catch (error) {
       console.error('Error generating QR code:', error);
-      alert('Error generating QR code. Please check your input and try again.');
+      alert(t('common.error'));
     }
   };
 
@@ -119,7 +122,7 @@ export default function QrCodeGenerator() {
     link.click();
     document.body.removeChild(link);
     
-    alert('QR Code downloaded');
+    alert(t('common.success'));
   };
 
   const copyQRCode = () => {
@@ -139,10 +142,10 @@ export default function QrCodeGenerator() {
           navigator.clipboard.write([
             new ClipboardItem({ 'image/png': blob })
           ]).then(() => {
-            alert('QR Code copied to clipboard');
+            alert(t('common.copied'));
           }).catch(err => {
             console.error('Error copying QR code:', err);
-            alert('Error copying QR code. Please try again or use the download option.');
+            alert(t('common.error'));
           });
         }
       });
@@ -161,14 +164,12 @@ export default function QrCodeGenerator() {
 
   return (
     <ToolLayout
-      title="QR Code Generator"
-      metaContent="Generate customizable QR codes for URLs, text, contact information, and more."
+      toolName={toolName}
       path="qr-code-generator"
     >
       <ResponsiveToolContainer
-        title="QR Code Generator"
-        description="Create customizable QR codes for various purposes including URLs, text, contact information, and WiFi networks."
-        usage="Select the type of content, enter the required information, customize your QR code appearance, then download or copy the generated QR code."
+        toolName={toolName}
+        usage={t(`tools.${toolName}.usage`)}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className={`p-4 rounded border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
@@ -180,7 +181,7 @@ export default function QrCodeGenerator() {
                     ''}`}
                   onClick={() => setActiveTab('text')}
                 >
-                  Text/URL
+                  {t(`tools.${toolName}.texturl`)}
                 </button>
                 <button
                   className={`py-2 px-4 ${activeTab === 'contact' ? 
@@ -188,7 +189,7 @@ export default function QrCodeGenerator() {
                     ''}`}
                   onClick={() => setActiveTab('contact')}
                 >
-                  Contact
+                  {t(`tools.${toolName}.contact`)}
                 </button>
                 <button
                   className={`py-2 px-4 ${activeTab === 'wifi' ? 
@@ -196,15 +197,15 @@ export default function QrCodeGenerator() {
                     ''}`}
                   onClick={() => setActiveTab('wifi')}
                 >
-                  WiFi
+                  {t(`tools.${toolName}.wifi`)}
                 </button>
               </div>
               
               {activeTab === 'text' && (
                 <div className="space-y-2">
-                  <label className="block font-medium mb-1">Text or URL</label>
+                  <label className="block font-medium mb-1">{t(`tools.${toolName}.textorurl`)}</label>
                   <textarea
-                    placeholder="Enter text or URL"
+                    placeholder={t(`tools.${toolName}.texturlplaceholder`)}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
@@ -216,7 +217,7 @@ export default function QrCodeGenerator() {
               {activeTab === 'contact' && (
                 <div className="space-y-3">
                   <div>
-                    <label className="block font-medium mb-1">Name*</label>
+                    <label className="block font-medium mb-1">{t('common.name')}*</label>
                     <input
                       type="text"
                       placeholder="John Doe"
@@ -226,17 +227,7 @@ export default function QrCodeGenerator() {
                     />
                   </div>
                   <div>
-                    <label className="block font-medium mb-1">Phone</label>
-                    <input
-                      type="text"
-                      placeholder="+1 (555) 123-4567"
-                      value={contactInfo.phone}
-                      onChange={(e) => handleContactInfoChange('phone', e.target.value)}
-                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-medium mb-1">Email</label>
+                    <label className="block font-medium mb-1">{t('common.email')}</label>
                     <input
                       type="email"
                       placeholder="john.doe@example.com"
@@ -246,27 +237,7 @@ export default function QrCodeGenerator() {
                     />
                   </div>
                   <div>
-                    <label className="block font-medium mb-1">Website</label>
-                    <input
-                      type="text"
-                      placeholder="https://example.com"
-                      value={contactInfo.website}
-                      onChange={(e) => handleContactInfoChange('website', e.target.value)}
-                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-medium mb-1">Company</label>
-                    <input
-                      type="text"
-                      placeholder="Acme Inc."
-                      value={contactInfo.company}
-                      onChange={(e) => handleContactInfoChange('company', e.target.value)}
-                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-medium mb-1">Job Title</label>
+                    <label className="block font-medium mb-1">{t('common.title')}</label>
                     <input
                       type="text"
                       placeholder="Software Engineer"
@@ -276,7 +247,37 @@ export default function QrCodeGenerator() {
                     />
                   </div>
                   <div>
-                    <label className="block font-medium mb-1">Address</label>
+                    <label className="block font-medium mb-1">{t('common.phone')}</label>
+                    <input
+                      type="text"
+                      placeholder="+1 (555) 123-4567"
+                      value={contactInfo.phone}
+                      onChange={(e) => handleContactInfoChange('phone', e.target.value)}
+                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-medium mb-1">{t('common.website')}</label>
+                    <input
+                      type="text"
+                      placeholder="https://example.com"
+                      value={contactInfo.website}
+                      onChange={(e) => handleContactInfoChange('website', e.target.value)}
+                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-medium mb-1">{t('common.company')}</label>
+                    <input
+                      type="text"
+                      placeholder="Acme Inc."
+                      value={contactInfo.company}
+                      onChange={(e) => handleContactInfoChange('company', e.target.value)}
+                      className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-medium mb-1">{t('common.address')}</label>
                     <input
                       type="text"
                       placeholder="123 Main St, City, Country"
@@ -291,7 +292,7 @@ export default function QrCodeGenerator() {
               {activeTab === 'wifi' && (
                 <div className="space-y-3">
                   <div>
-                    <label className="block font-medium mb-1">Network Name (SSID)*</label>
+                    <label className="block font-medium mb-1">{t('common.network')}*</label>
                     <input
                       type="text"
                       placeholder="WiFi Network Name"
@@ -301,7 +302,7 @@ export default function QrCodeGenerator() {
                     />
                   </div>
                   <div>
-                    <label className="block font-medium mb-1">Password</label>
+                    <label className="block font-medium mb-1">{t('common.password')}</label>
                     <input
                       type="password"
                       placeholder="WiFi Password"
@@ -311,7 +312,7 @@ export default function QrCodeGenerator() {
                     />
                   </div>
                   <div>
-                    <label className="block font-medium mb-1">Encryption Type</label>
+                    <label className="block font-medium mb-1">{t('common.encryption')}</label>
                     <select
                       value={wifiInfo.encryption}
                       onChange={(e) => handleWifiInfoChange('encryption', e.target.value)}
@@ -319,7 +320,7 @@ export default function QrCodeGenerator() {
                     >
                       <option value="WPA">WPA/WPA2</option>
                       <option value="WEP">WEP</option>
-                      <option value="nopass">None</option>
+                      <option value="nopass">{t('common.none')}</option>
                     </select>
                   </div>
                   <div className="flex items-center">
@@ -330,7 +331,7 @@ export default function QrCodeGenerator() {
                       onChange={(e) => handleWifiInfoChange('hidden', e.target.checked)}
                       className="mr-2"
                     />
-                    <label htmlFor="wifi-hidden">Hidden Network</label>
+                    <label htmlFor="wifi-hidden">{t('common.hidden')}</label>
                   </div>
                 </div>
               )}
@@ -339,23 +340,22 @@ export default function QrCodeGenerator() {
             <div className="space-y-3 mt-6">
               <div>
                 <label className="block font-medium mb-1">
-                  Error Correction Level
-                  <span className="ml-1 text-xs text-gray-500">(Higher levels make QR codes more resistant to damage)</span>
+                  {t(`tools.${toolName}.errorcorrection`)}
                 </label>
                 <select
                   value={errorCorrectionLevel}
                   onChange={(e) => setErrorCorrectionLevel(e.target.value)}
                   className={`w-full p-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white'}`}
                 >
-                  <option value="L">Low (7%)</option>
-                  <option value="M">Medium (15%)</option>
-                  <option value="Q">Quartile (25%)</option>
-                  <option value="H">High (30%)</option>
+                  <option value="L">{t(`tools.${toolName}.low`)}</option>
+                  <option value="M">{t(`tools.${toolName}.medium`)}</option>
+                  <option value="Q">{t(`tools.${toolName}.quartile`)}</option>
+                  <option value="H">{t(`tools.${toolName}.high`)}</option>
                 </select>
               </div>
               
               <div>
-                <label className="block font-medium mb-1">Size: {size}px</label>
+                <label className="block font-medium mb-1">{t(`tools.${toolName}.size`)}: {size}px</label>
                 <input
                   type="range"
                   min="100"
@@ -368,7 +368,7 @@ export default function QrCodeGenerator() {
               </div>
               
               <div>
-                <label className="block font-medium mb-1">Margin: {margin}</label>
+                <label className="block font-medium mb-1">{t(`tools.${toolName}.margin`)}: {margin}</label>
                 <input
                   type="range"
                   min="0"
@@ -382,7 +382,7 @@ export default function QrCodeGenerator() {
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-medium mb-1">Dark Color</label>
+                  <label className="block font-medium mb-1">{t('common.color')}</label>
                   <div className="flex">
                     <input
                       type="color"
@@ -400,7 +400,7 @@ export default function QrCodeGenerator() {
                 </div>
                 
                 <div>
-                  <label className="block font-medium mb-1">Light Color</label>
+                  <label className="block font-medium mb-1">{t(`tools.${toolName}.backgroundcolor`)}</label>
                   <div className="flex">
                     <input
                       type="color"
@@ -427,7 +427,7 @@ export default function QrCodeGenerator() {
                   <canvas ref={canvasRef} className="mx-auto"></canvas>
                 ) : (
                   <div className="w-[200px] h-[200px] flex items-center justify-center text-gray-400">
-                    QR Code will appear here
+                    {t(`tools.${toolName}.content`)}
                   </div>
                 )}
               </div>
@@ -441,7 +441,7 @@ export default function QrCodeGenerator() {
                     'bg-custom-light-blue text-white hover:bg-custom-dark-blue'} 
                     ${!qrCodeDataUrl ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  Download
+                    {t(`common.download`)}
                 </button>
                 <button 
                   onClick={copyQRCode} 
@@ -451,13 +451,13 @@ export default function QrCodeGenerator() {
                     'bg-gray-200 text-gray-800 hover:bg-gray-300'} 
                     ${!qrCodeDataUrl ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  Copy
+                    {t(`common.copy`)}
                 </button>
               </div>
               
               {activeTab !== 'text' && (
                 <div className="mt-6 w-full">
-                  <label className="block font-medium mb-1">Generated Content</label>
+                  <label className="block font-medium mb-1">{t(`common.result`)}</label>
                   <textarea
                     value={text}
                     readOnly
