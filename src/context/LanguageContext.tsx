@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { useTranslation } from 'react-i18next'
 import i18n from '../i18n'
 
-type Language = 'en' | 'es' | 'fr' | 'de' | 'zh' | 'ja'
+type Language = 'en' | 'es' | 'fr' | 'de' | 'zh' | 'ja' | 'hi' | 'uk'
 
 interface LanguageContextType {
   language: Language
@@ -29,7 +29,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     { code: 'fr' as Language, name: 'Français' },
     { code: 'de' as Language, name: 'Deutsch' },
     { code: 'zh' as Language, name: '中文' },
-    { code: 'ja' as Language, name: '日本語' }
+    { code: 'ja' as Language, name: '日本語' },
+    { code: 'hi' as Language, name: 'हिन्दी' },
+    { code: 'uk' as Language, name: 'Українська' }
   ]
 
   const setLanguage = (newLanguage: Language) => {

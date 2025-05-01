@@ -9,6 +9,8 @@ import frTranslation from './locales/fr.json'
 import deTranslation from './locales/de.json'
 import zhTranslation from './locales/zh.json'
 import jaTranslation from './locales/ja.json'
+import hiTranslation from './locales/hi.json'
+import ukTranslation from './locales/uk.json'
 
 const resources = {
   en: {
@@ -28,6 +30,12 @@ const resources = {
   },
   ja: {
     translation: jaTranslation
+  },
+  hi: {
+    translation: hiTranslation
+  },
+  uk: {
+    translation: ukTranslation
   }
 }
 
